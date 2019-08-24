@@ -28,6 +28,9 @@ module.exports = {
       lineHeight: {
         relaxed: 1.75
       },
+      boxShadow: {
+        'mixed': '0 0px 3px 0px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04), 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+      },
       fontSize: {
         'xxs': '0.65rem',
         'md': '1.075rem',
