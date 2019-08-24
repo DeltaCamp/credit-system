@@ -47,6 +47,7 @@ export const SpenderQRScanner = class _SpenderQRScanner extends Component {
 
   handleScan = data => {
     if (data) {
+      alert(data)
       this.props.handleScan(data)
     }
   }
