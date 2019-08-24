@@ -7,6 +7,7 @@ import { withApollo } from 'react-apollo'
 
 import localForage from 'lib/localForage'
 import { Button, Input, Form } from 'lib/components/form'
+import { LoadingSpinner } from 'lib/components/LoadingSpinner'
 import { ConnectWallet } from 'lib/components/ConnectWallet'
 import { ConnectHumanityDao } from 'lib/components/ConnectHumanityDao'
 import { ContentBox } from 'lib/components/ContentBox'
@@ -39,6 +40,8 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       if (await localForage.getItem('humanityDaoConnected')) {
         this.handleConnectDaoClick()
       }
+
+     
     }
 
     handleAmountTextInputChange = (e) => {
@@ -63,6 +66,13 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
         this.setState({
           qrCode: true
         })
+
+        this.props.setTimeout(() => {
+          this.setState({
+            qrCodeReady: true
+          })
+        }, 2000)
+        
       }
     }
 
@@ -123,11 +133,14 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
         <div
           className={classnames(
             'fixed t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 z-20 trans trans-faster', {
-              'lightSpeedOut': !this.state.qrCode,
-              'lightSpeedIn': this.state.qrCode,
+              'fadeOutDown': !this.state.qrCode,
+              'fadeInUp': this.state.qrCode,
               'pointer-events-none': !this.state.qrCode
             }
           )}
+          style={{
+            backgroundColor: '#F9FBFD'
+          }}
         >
           <div className='r-0 t-0 absolute p-2 md:p-4'>
             <Button
@@ -139,9 +152,31 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
           </div>
           
           <div className='flex flex-col justify-center items-center h-full'>
-            <p className='-mt-4'>
-              Show generated QR Code here
-            </p>
+            
+
+            {
+              this.state.qrCodeReady ?
+                <>
+                  <ContentBox
+                  >
+                    <div className='text-4xl'>
+                      &nbsp;
+                    </div>
+                    <p className='text-2xl mt-24'>
+                      Have the staff scan this:
+                    </p>
+                    <LoadingSpinner />
+                  </ContentBox>
+                </> : <>
+                  <div className='text-4xl'>
+                    &nbsp;
+                  </div>
+                  <p className='text-2xl mt-24'>
+                    Building Code ...
+                  </p>
+                  <LoadingSpinner />
+                </>
+            }
           </div>
         </div>
 
