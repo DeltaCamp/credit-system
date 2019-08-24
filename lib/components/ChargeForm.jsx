@@ -94,14 +94,14 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
     handleSubmit = async (e) => {
       e.preventDefault()
 
-      if (this.state.daiAmountInEther > 0) {
+      if (this.state.daiAmountInEther > 0 && this.state.recipientSelected) {
         this.setState({
           showQrCode: true
         })
 
         const variables = {
           from: this.props.networkAccountQuery.account,
-          to: '0xB9589Ca9d932B83C80C6491B3e4d61a52475E287',
+          to: this.state.recipientInfo.address,
           value: this.state.daiAmountInEther
         }
 

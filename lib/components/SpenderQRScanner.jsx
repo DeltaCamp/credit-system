@@ -47,13 +47,12 @@ export const SpenderQRScanner = class _SpenderQRScanner extends Component {
 
   handleScan = data => {
     if (data) {
-      alert(data)
-      this.props.handleScan(data)
+      console.log('RAD: ', data)
+      this.props.handleScan(data.replace('ethereum:',''))
     }
   }
 
   handleError = err => {
-    alert(err)
     console.error(err)
   }
   
