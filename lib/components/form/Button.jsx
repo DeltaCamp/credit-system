@@ -12,6 +12,7 @@ export function Button(props) {
     roundedClasses,
     className,
     isOutline,
+    isDark,
     color,
   } = props
 
@@ -48,6 +49,10 @@ export function Button(props) {
 
   if (textClasses === undefined) {
     textClasses = 'text-lg lg:text-xl text-white'
+  }
+
+  if (isDark) {
+    textClasses = 'text-lg lg:text-xl text-gray-600'
   }
 
   if (paddingClasses === undefined) {
@@ -87,6 +92,7 @@ export function Button(props) {
     'transitionClasses',
     'borderClasses',
     'isOutline',
+    'isDark',
     'paddingClasses', 
     'backgroundClasses', 
     'textClasses', 
