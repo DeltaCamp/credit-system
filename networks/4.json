@@ -1,10 +1,10 @@
 [
   {
     "contractName": "Token",
-    "address": "0x51c42dED638e7bB936819750E4D459d652B22AC2"
+    "address": "0xeF7EF0DDBF124481CC714ab2d74B5565c7a743a3"
   },
   {
     "contractName": "CreditSystem",
-    "address": "0x03197Db871E52Ea15A0f721Cf365574571698Ab4"
+    "address": "0xFbD0F9C9b9575C9a14e39445Abc4EAAD9d69CcAB"
   }
 ]
