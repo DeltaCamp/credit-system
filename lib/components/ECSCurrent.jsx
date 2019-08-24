@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import ReactTimeout from 'react-timeout'
 import { withApollo } from 'react-apollo'
 
+import localForage from 'lib/localForage'
 import { Button } from 'lib/components/form'
 import { TransactionButton } from 'lib/components/TransactionButton'
-import { TableCol } from 'lib/components/TableCol'
 import { TableRow } from 'lib/components/TableRow'
 import { DaiLogo } from 'lib/components/DaiLogo'
 import { ConnectWallet } from 'lib/components/ConnectWallet'
@@ -12,7 +12,6 @@ import { ContentBox } from 'lib/components/ContentBox'
 import { StatRow } from 'lib/components/StatRow'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
-import { TabButton } from 'lib/components/TabButton'
 import { creditScore } from 'lib/utils/creditScore'
 
 const debug = require('debug')('pt:components:ECSCurrent')
@@ -23,11 +22,22 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
       humanityDaoConnected: false
     }
 
-    handleConnectDaoClick = (e) => {
-      e.preventDefault()
+    handleConnectDaoClick = async (e) => {
+      if (e) {
+        e.preventDefault()
+      }
+
       this.setState({
         humanityDaoConnected: true
       })
+
+      await localForage.setItem('humanityDaoConnected', true)
+    }
+
+    async componentDidMount () {
+      if (await localForage.getItem('humanityDaoConnected')) {
+        this.handleConnectDaoClick()
+      }
     }
     
     getPage = () => {
@@ -71,7 +81,7 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
                       />
                     </> : <>
                       <h3>
-                        For identity verification please connect your Ethereum address to HumanityDAO.
+                        For identity verification please connect your Ethereum address to HumanityDAO:
                       </h3>
                       <br />
                       <Button
@@ -123,7 +133,6 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
                     isHorizontal
                   >
                     <TransactionButton
-                      txInFlight={true}
                       color='green'
                     >
                       Deposit

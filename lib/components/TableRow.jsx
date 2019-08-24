@@ -16,6 +16,8 @@ export const TableRow = ({
     {!noRule && <div>
       <hr
         style={{
+          borderTop: '2px solid #f2f2f2',
+          height: 1,
           margin: '5px auto',
           width: '80%'
         }}

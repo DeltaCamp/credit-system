@@ -86,6 +86,7 @@ export function Button(props) {
   const newProps = omit(props, [
     'transitionClasses',
     'borderClasses',
+    'isOutline',
     'paddingClasses', 
     'backgroundClasses', 
     'textClasses', 
