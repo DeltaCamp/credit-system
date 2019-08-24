@@ -82,7 +82,7 @@ export const TxList =
             </div>
           </Button>
         </li>
-        <li className='border-b'>
+        <li className=''>
           <Button
             isText
             textClasses='text-sm'
@@ -107,16 +107,24 @@ export const TxList =
             </div>
           </Button>
         </li>
-        <li className=' mt-2'>
+        <li className=' mt-5'>
           <Button
-            isText
-            textClasses='text-sm'
-            className='text-blue-600 no-underline w-full text-left py-2'
+            textClasses='text-sm text-white'
+            className='w-6/12'
             onClick={this.showTransactions}
           >
-            <div className='rounded border border-blue-400 text-center w-2/3 mx-auto px-2 py-2 relative -t-2'>
-              View All Transactions
-            </div>
+            See Pending Sales
+          </Button>
+          <div className='w-1/12 inline-block'>
+            &nbsp;
+          </div>
+          <Button
+            color='green'
+            textClasses='text-sm text-white'
+            className='w-5/12'
+            onClick={this.showTransactions}
+          >
+            Run Batch Transactions
           </Button>
         </li>
       </ul>

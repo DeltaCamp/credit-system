@@ -15,13 +15,15 @@ export const RecipientDaiBalance =
       }
       return <>
         <ContentBox>
-          <h1>
+          <p className='text-lg text-center'>
             Merchant Overview:
-          </h1>
-
-          <h6 className='text-left ml-4 text-gray-700'>
+          </p>
+        </ContentBox>
+        
+        <ContentBox>
+          <p className='text-center text-sm text-gray-700'>
             Transactions:
-          </h6>
+          </p>
           <TxList
           />
         </ContentBox>
