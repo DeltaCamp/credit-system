@@ -52,6 +52,7 @@ export function Input(props) {
 
   return <>
     <input
+      autoFocus
       {...newProps}
       className={className}
     /> {addOn}

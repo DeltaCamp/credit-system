@@ -8,7 +8,7 @@ export function Form(props) {
     isLight
   } = props
 
-  const defaultClasses = 'flex flex-col focus:outline-none focus:outline-none m-auto mb-0 items-center'
+  const defaultClasses = 'flex flex-col focus:outline-none focus:outline-none mb-0 items-center'
   // const defaultClasses = ''
 
   const className = classnames(
