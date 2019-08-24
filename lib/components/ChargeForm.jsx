@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import ReactTimeout from 'react-timeout'
 import { withRouter } from 'next/router'
 import { withApollo } from 'react-apollo'
+import { ethers } from 'ethers'
 
 import localForage from 'lib/localForage'
 import { Button, Input, Form } from 'lib/components/form'
@@ -13,6 +14,9 @@ import { StakeFunds } from 'lib/components/StakeFunds'
 import { ContentBox } from 'lib/components/ContentBox'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
+import { ChargeQR } from 'lib/components/ChargeQR'
+import { encodeCharge } from 'lib/services/encodeCharge'
+import { signCharge } from 'lib/services/signCharge'
 
 const debug = require('debug')('pt:components:ChargeForm')
 
@@ -84,7 +88,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       }
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
       e.preventDefault()
 
       if (this.state.daiAmountInEther > 0) {
@@ -92,12 +96,19 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
           showQrCode: true
         })
 
-        this.props.setTimeout(() => {
-          this.setState({
-            qrCodeReady: true
-          })
-        }, 2000)
-        
+        const variables = {
+          from: this.props.networkAccountQuery.account,
+          to: '0xB9589Ca9d932B83C80C6491B3e4d61a52475E287',
+          value: this.state.daiAmountInEther
+        }
+
+        const charge = encodeCharge(variables)
+
+        const signature = await signCharge(charge)
+
+        this.setState({
+          charge, signature, qrCodeReady: true
+        })
       }
     }
 
@@ -205,23 +216,11 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             </Button>
           </div>
           
-          <div className='flex flex-col justify-center items-center'>
+          <div className='flex flex-col justify-center items-center w-100 h-full flex-1'>
             {
               this.state.qrCodeReady ?
                 <>
-                  <ContentBox
-                    className='mt-16'
-                  >
-                    <p className='text-2xl'>
-                      Have the payment recipient scan this:
-                    </p>
-                    <img
-                      className='mx-auto'
-                      src='/static/qart1.png'
-                      width='200'
-                      height='200'
-                    />
-                  </ContentBox>
+                  <ChargeQR charge={this.state.charge} signature={this.state.signature} />
                 </> : <>
                   <div className='text-4xl'>
                     &nbsp;

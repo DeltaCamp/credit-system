@@ -16,8 +16,6 @@ export function withTokenQuery (Component) {
         spender: abiMapping.getAddress('CreditSystem', props.networkAccountQuery.networkId)
       }
 
-      console.log('token query variables: ', variables)
-
       return {
         variables
       }
