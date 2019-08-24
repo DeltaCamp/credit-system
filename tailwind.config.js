@@ -54,7 +54,7 @@ module.exports = {
         'sans-regular': ['Soleil', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
         'condensed': ['novecento-sans-condensed', 'DIN Condensed', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
         'headline': ['novecento-sans-narrow', 'DIN Condensed', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
-        'sans': ['Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+        'sans': ['Helvetica', 'Arial', 'sans-serif'],
       },
       opacity: {
         '0': '0',

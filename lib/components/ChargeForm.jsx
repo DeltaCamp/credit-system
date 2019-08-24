@@ -222,8 +222,6 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
           className={classnames(
             'fixed forceOffScreen t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-faster', {
               'slideInDown': this.state.showQrCode,
-              'slideOutUp': !this.state.showQrCode,
-              'pointer-events-none': !this.state.showQrCode
             }
           )}
           style={{
@@ -286,17 +284,18 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             showSpenderQrScanner={this.state.showSpenderQrScanner}
           />
 
-          <div className='r-0 t-0 fixed p-2 md:p-4'>
+          <div className='font-sans r-0 t-0 fixed p-2 md:p-4'>
             <Button
               onClick={this.handleShowAccount}
               isText
+              isDark
             >
-              &#10006;
+               &#10006;
             </Button>
           </div>
 
           {!this.state.recipientSelected ? <>
-            <ContentBox className='mt-8'>
+            <ContentBox className='mt-2 mx-8'>
               <p className='text-pink-500 text-xl px-8'>
                 1. Who would you like to send a payment to?
               </p>
@@ -354,7 +353,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
               </ul>
 
               <hr /> */}
-              <ContentBox>
+              <ContentBox className='mt-2 mx-8'>
                 <Button
                   color='green'
                   onClick={this.showSpenderQrScanner}
@@ -369,7 +368,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
                 </Button>
               </ContentBox>
 
-              <ContentBox>
+              <ContentBox className='mt-2 mx-8'>
                 <p>
                   Choose from recent recipients:
                 </p>
@@ -378,7 +377,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
                 </p>
               </ContentBox>
             </> : <>
-            <ContentBox className='mt-12'>
+            <ContentBox className='mt-2 mx-8'>
               <p className='text-pink-500 text-xl px-8'>
                 2. How much would you like to send to
                 <br />

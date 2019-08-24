@@ -65,7 +65,7 @@ export const SpenderQRScanner = class _SpenderQRScanner extends Component {
 
     return <div
       className={classnames(
-        'fixed forceOffScreen t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-fastest z-20', {
+        'fixed forceOffScreen t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-8 py-6 trans trans-fastest z-20', {
           'slideInDown': this.props.showSpenderQrScanner
         }
       )}
