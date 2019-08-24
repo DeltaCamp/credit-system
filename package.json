@@ -6,7 +6,7 @@
   "repository": "git@github.com:DeltaCamp/credit-system.git",
   "scripts": {
     "dev": "yarn apply-registry && next dev",
-    "build": "next build",
+    "build": "yarn apply-registry && next build",
     "start": "next start",
     "apply-registry": "$(npm bin)/apply-registry -o artifacts",
     "dist": "yarn build && next export"
