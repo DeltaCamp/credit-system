@@ -243,6 +243,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             {
               this.state.qrCodeReady ?
                 <>
+                  {/* a */}
                   <ContentBox
                     noGutter
                   >
