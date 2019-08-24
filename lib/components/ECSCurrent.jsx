@@ -8,15 +8,12 @@ import localForage from 'lib/localForage'
 import { Button } from 'lib/components/form'
 import { DaiBalanceContentBox } from 'lib/components/DaiBalanceContentBox'
 import { CreditScore } from 'lib/components/CreditScore'
-import { DaiLogo } from 'lib/components/DaiLogo'
 import { ConnectWallet } from 'lib/components/ConnectWallet'
 import { ConnectHumanityDao } from 'lib/components/ConnectHumanityDao'
 import { ContentBox } from 'lib/components/ContentBox'
-import { StatRow } from 'lib/components/StatRow'
 import { TokenQuery } from 'lib/components/TokenQuery'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
-import { creditScore } from 'lib/utils/creditScore'
 
 const debug = require('debug')('pt:components:ECSCurrent')
 
@@ -124,22 +121,13 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
           />
 
 
-          <ContentBox>
+          <ContentBox
+            isTight
+          >
             <CreditScore
               label='Your credit score'
               score={887}
             />
-            {/* <StatRow
-              color='black'
-              title='Your credit score:'
-              value={creditScore(691)}
-            /> */}
-            {/* <StatRow
-              color='black'
-              title='Current deposit:'
-              value={'200'}
-              unit={<DaiLogo />}
-            /> */}
           </ContentBox>
 
           <ContentBox>

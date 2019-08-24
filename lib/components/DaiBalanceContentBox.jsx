@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import { DaiBalanceChart } from 'lib/components/DaiBalanceChart'
 import { ContentBox } from 'lib/components/ContentBox'
 import { DaiLogo } from 'lib/components/DaiLogo'
 import { TransactionButton } from 'lib/components/TransactionButton'
@@ -8,7 +9,18 @@ import { TableRow } from 'lib/components/TableRow'
 export const DaiBalanceContentBox = 
   class _DaiBalanceContentBox extends Component {
     render () {
+      const token = {
+        balanceOf: 270,
+        stakeAmount: -140
+      }
       return <ContentBox>
+
+        <DaiBalanceChart
+          label='Your credit score'
+          balanceOf={token.balanceOf}
+          stakeAmount={token.stakeAmount}
+        />
+
         {/* <div
           className='tab-button-menu tab-button-menu--right flex items-center menu'
         >
@@ -37,7 +49,7 @@ export const DaiBalanceContentBox =
           <br/>
           Top up your account balance here:
         </h6>
-
+{/* 
         <TableRow>
           <span className='text-7xl'>
             200&nbsp;
@@ -46,7 +58,7 @@ export const DaiBalanceContentBox =
           <span className='text-sm text-gray-600'>
             Your current Dai <DaiLogo /> balance
           </span>
-        </TableRow>
+        </TableRow> */}
 
         <TableRow
           noRule
