@@ -167,8 +167,9 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
             >
               <FeatherIcon
                 icon='menu'
-                className='h-full w-full bg-white border-2 border-white shadow-mixed fill-current'
+                className='w-8 bg-white border-2 border-white shadow-mixed fill-current'
                 style={{
+                  height: '32px',
                   padding: '2px'
                 }}
               />
