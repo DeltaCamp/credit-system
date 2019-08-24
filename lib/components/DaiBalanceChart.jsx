@@ -126,7 +126,7 @@ export const DaiBalanceChart = class _DaiBalanceChart extends Component {
 
     if (!Chart) { return null }
 
-    return <div id='chart'>
+    return <div id='chart' className={this.props.className || ''}>
       <Chart
         options={this.state.options}
         series={this.state.series}

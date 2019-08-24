@@ -114,7 +114,7 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
             >
               <FeatherIcon
                 icon='menu'
-                className='h-full w-full bg-white border-2 border-gray-200 shadow-xl fill-current'
+                className='h-full w-full bg-white border-2 border-white shadow-mixed fill-current'
                 style={{
                   padding: '2px'
                 }}

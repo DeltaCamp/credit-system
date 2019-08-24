@@ -19,6 +19,7 @@ export const DaiBalanceContentBox =
           label='Your credit score'
           balanceOf={token.balanceOf}
           stakeAmount={token.stakeAmount}
+          className='mt-8'
         />
 
         {/* <div
@@ -43,12 +44,17 @@ export const DaiBalanceContentBox =
             Transactions
           </TabButton>
         </div> */}
-        <h6>
-          Merchants will determine your credibility by your credit score and account balance.
-          <br />
-          <br/>
-          Top up your account balance here:
-        </h6>
+        <TableRow>
+        </TableRow>
+        <TableRow>
+          <h6>
+            Merchants will determine your credibility by your credit score and account balance.
+            <br />
+            <br />
+            Top up your account balance here:
+          </h6>
+        </TableRow>
+        
 {/* 
         <TableRow>
           <span className='text-7xl'>
