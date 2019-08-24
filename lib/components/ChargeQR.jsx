@@ -22,7 +22,7 @@ export const ChargeQR = withNetworkAccountQuery(class _ChargeQR extends PureComp
       <div
         className='flex flex-col w-full justify-start items-center'
       >
-        <p className='text-xl'>
+        <p className='text-lg'>
           To complete payment, have the recipient scan this:
         </p>
         <a
@@ -35,7 +35,7 @@ export const ChargeQR = withNetworkAccountQuery(class _ChargeQR extends PureComp
         >
           <QRCode value={url} renderAs='svg' className='w-full h-full' />
         </a>
-        <p className='text-xl mt-24'>
+        <p className='text-xl mt-12'>
           <Button
             isOutline
             onClick={this.props.handleShowAccount}

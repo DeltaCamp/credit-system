@@ -241,7 +241,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
               this.state.qrCodeReady ?
                 <>
                   <ContentBox
-                    className='mt-16'
+                    noGutter
                   >
                     <ChargeQR
                       charge={this.state.charge}

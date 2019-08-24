@@ -65,6 +65,7 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
 
       if (CreditSystem) {
         const { stake } = CreditSystem
+        // console.log(stake.toString())
 
         if (stake.toString() == '0') {
           showStakeFunds = true
@@ -75,7 +76,8 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
         <SubscriptionQueryRefetch
           subscription={tokenSubscription}
           query={tokenQuery}
-          queryKey={'tokenQuery'}>
+          queryKey={'tokenQuery'}
+        >
           <div
             className={classnames(
               'fixed forceOffScreen t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-fastest z-20', {
