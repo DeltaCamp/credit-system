@@ -72,12 +72,14 @@ export const SpenderQRScanner = class _SpenderQRScanner extends Component {
       )}
     >
       {this.props.showSpenderQrScanner &&
-        <div className='mt-8'>
+        <div className='-mt-2'>
           <QrReader
+            // showViewFinder={false}
             delay={300}
             onError={this.handleError}
             onScan={this.handleScan}
-            style={{ width: '100%' }}
+            style={{ width: '85%' }}
+            className='mx-auto'
           />
         </div>
       }
@@ -97,10 +99,10 @@ export const SpenderQRScanner = class _SpenderQRScanner extends Component {
         )}
       >
         <div className='flex flex-col  h-full'>
-          <p className='mb-6 text-2xl'>
+          <p className='mb-2 text-xl'>
             Scan address
           </p>
-          <p className='mb-2 text-lg text-gray-600'>
+          <p className='mb-2 text-base text-gray-600'>
             Scan the recipient's QR code with your camera to send them a payment.
           </p>
 

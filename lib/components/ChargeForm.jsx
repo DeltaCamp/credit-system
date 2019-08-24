@@ -297,7 +297,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
           </div>
 
           {!this.state.recipientSelected ? <>
-            <ContentBox className='mt-12'>
+            <ContentBox className='mt-8'>
               <p className='text-pink-500 text-xl px-8'>
                 1. Who would you like to send a payment to?
               </p>

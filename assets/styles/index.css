@@ -30,10 +30,16 @@ html {
   overflow-x: hidden;
 }
 
+html,
+body{
+  height: 100%;
+}
+
 body {
   @apply font-sans-regular;
   background-color: #F9FBFD;
   overflow-x: hidden;
+  margin: 0;
 }
 
 hr {
@@ -119,13 +125,20 @@ button:not(.burger)[disabled] {
 @tailwind utilities;
 @tailwind screens;
 
+
+#__next {
+  height: 100%;
+}
+
 .main-grid {
+  height: 100%;
   display: grid;
   grid-template-areas:
     "content"
     "header";
   grid-template-rows: auto 74px;
-  height: 100vh;
+  grid-template-columns: 1fr;
+  /* height: 100vh; */
   position: relative;
   z-index: 2;
 }
