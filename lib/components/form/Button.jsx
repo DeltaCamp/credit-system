@@ -64,7 +64,7 @@ export function Button(props) {
   }
 
   if (backgroundClasses === undefined) {
-    backgroundClasses = `bg-${color}-400 hover:bg-${color}-300 active:bg-${color}-600`
+    backgroundClasses = `bg-${color}-400 hover:bg-${color}-500 active:bg-${color}-600`
   } 
   
   if (isError) {

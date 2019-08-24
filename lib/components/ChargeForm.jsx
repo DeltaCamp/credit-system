@@ -4,7 +4,6 @@ import ReactTimeout from 'react-timeout'
 import FeatherIcon from 'feather-icons-react'
 import { withRouter } from 'next/router'
 import { withApollo } from 'react-apollo'
-import { ethers } from 'ethers'
 
 import localForage from 'lib/localForage'
 import { Button, Input, Form } from 'lib/components/form'
@@ -231,20 +230,28 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             backgroundColor: '#F9FBFD'
           }}
         >
-          <div className='r-0 t-0 fixed p-2 md:p-4'>
+          {/* <div className='r-0 t-0 absolute p-2 md:p-4'>
             <Button
               onClick={this.handleCloseQRCodeModal}
               isText
             >
               &#10006;
             </Button>
-          </div>
+          </div> */}
           
           <div className='flex flex-col justify-center items-center w-100 h-full flex-1'>
             {
               this.state.qrCodeReady ?
                 <>
-                  <ChargeQR charge={this.state.charge} signature={this.state.signature} />
+                  <ContentBox
+                    noGutter
+                  >
+                    <ChargeQR
+                      charge={this.state.charge}
+                      signature={this.state.signature}
+                      handleShowAccount={this.handleShowAccount}
+                    /> 
+                  </ContentBox>
                 </> : <>
                   <div className='text-4xl'>
                     &nbsp;
@@ -287,19 +294,21 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             showSpenderQrScanner={this.state.showSpenderQrScanner}
           />
 
-          <div className='font-sans r-0 t-0 fixed p-2 md:p-4'>
-            <Button
-              onClick={this.handleShowAccount}
-              isText
-              isDark
-            >
-               &#10006;
-            </Button>
-          </div>
-
           {!this.state.recipientSelected ? <>
-            <ContentBox className='mt-2 mx-8'>
-              <p className='text-pink-500 text-xl px-8'>
+            <div className='font-sans r-0 t-0 absolute p-2 md:p-4'>
+              <Button
+                onClick={this.handleShowAccount}
+                isText
+                isDark
+              >
+                &#10006;
+              </Button>
+            </div>
+
+            <ContentBox
+              noGutter
+            >
+              <p className='text-pink-500 text-lg px-8'>
                 1. Who would you like to send a payment to?
               </p>
             </ContentBox>
@@ -380,8 +389,20 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
                 </p>
               </ContentBox>
             </> : <>
-            <ContentBox className='mt-2 mx-8'>
-              <p className='text-pink-500 text-xl px-8'>
+            <ContentBox
+              noGutter
+            >
+              <div className='font-sans r-0 t-0 absolute p-2 md:p-4'>
+                <Button
+                  onClick={this.handleShowAccount}
+                  isText
+                  isDark
+                >
+                  &#10006;
+                </Button>
+              </div>
+
+              <p className='text-pink-500 text-lg px-8'>
                 2. How much would you like to send to
                 <br />
                 "<span className='text-blue-600 font-bold'>{shortenAddress(this.state.recipientInfo.address)}</span>" ?
@@ -419,7 +440,12 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
                 onClick={this.handleSubmit}
                 disabled={this.state.daiAmountInEther < 1}
               >
-                + Create Send Code
+                <FeatherIcon
+                  icon='dollar-sign'
+                  className='mx-auto text-white mb-2 mt-1'
+                  height='28'
+                  width='28'
+                /> Create Payment
               </Button>
             </ContentBox>
           </>}
