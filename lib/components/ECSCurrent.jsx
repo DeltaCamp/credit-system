@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import ReactTimeout from 'react-timeout'
 import SVG from 'react-inlinesvg'
 import { withApollo } from 'react-apollo'
 
 import localForage from 'lib/localForage'
 import { Button } from 'lib/components/form'
-import { TransactionButton } from 'lib/components/TransactionButton'
-import { TableRow } from 'lib/components/TableRow'
+import { DaiBalanceContentBox } from 'lib/components/DaiBalanceContentBox'
+import { CreditScore } from 'lib/components/CreditScore'
 import { DaiLogo } from 'lib/components/DaiLogo'
 import { ConnectWallet } from 'lib/components/ConnectWallet'
+import { ConnectHumanityDao } from 'lib/components/ConnectHumanityDao'
 import { ContentBox } from 'lib/components/ContentBox'
 import { StatRow } from 'lib/components/StatRow'
+import { TokenQuery } from 'lib/components/TokenQuery'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
 import { creditScore } from 'lib/utils/creditScore'
@@ -42,12 +45,12 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
     }
     
     getPage = () => {
-      const { page } = this.props.router.query
+      const page = '/asdf'
       switch (page) {
         case 'this':
           return 'that'
         default:
-          return 'pool'
+          return 'or'
       }
     }
 
@@ -56,121 +59,104 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
     }
 
     render() {
-      const { networkAccountQuery } = this.props
-      const { account, loading, error } = networkAccountQuery || {}
+      let loading = true
 
-      if (error) {
-        console.error(error)
+      let networkAccountLoading,
+        networkAccountError,
+        creditSystemLoading,
+        creditSystemError,
+        userAddress,
+        creditSystemAddress
+
+      let networkAccount = {}
+      let creditSystem = {}
+
+      const { networkAccountQuery, creditSystemQuery } = this.props
+
+      if (creditSystemQuery) {
+        creditSystem = creditSystemQuery.creditSystem
+        creditSystemLoading = creditSystemQuery.loading
+        creditSystemError = creditSystemQuery.error
+      }
+
+      if (networkAccountQuery) {
+        networkAccount = networkAccountQuery.networkAccount
+        networkAccountLoading = networkAccountQuery.loading
+        networkAccountError = networkAccountQuery.error
+      }
+
+      if (
+        creditSystem &&
+        !creditSystemLoading &&
+        networkAccount &&
+        !networkAccountLoading
+      ) {
+        loading = false
+        userAddress = networkAccount.account
+      }
+
+      if (creditSystemError || networkAccountError) {
+        console.error(creditSystemError)
+        console.error(networkAccountError)
       }
 
       const page = this.getPage()
 
-      return (
-        <>
-          <div>
-            {
-              !account ? <ConnectWallet /> :
-              <>
-                <ContentBox>
-                  {this.state.humanityDaoConnected ? <>
-                      <StatRow
-                        color='black'
-                        title='Your credit score:'
-                        value={creditScore(691)}
-                      />
-                      <StatRow
-                        color='black'
-                        title='Current deposit:'
-                        value={'200'}
-                        unit={<DaiLogo />}
-                      />
-                    </> : <>
-                      <h3>
-                        For identity verification please connect your Ethereum address to HumanityDAO:
-                      </h3>
-                      <br />
-                      <Button
-                        onClick={this.handleConnectDaoClick}
-                      >
-                        Connect HumanityDAO
-                      </Button>
-                    </>
-                  }
-                </ContentBox>
-                
-                <ContentBox
-                >
-                  {/* <div
-                    className='tab-button-menu tab-button-menu--right flex items-center menu'
-                  >
-                    <TabButton
-                      active={page === 'account'}
-                      onClick={this.showBalances}
-                      roundedClasses='rounded-tl-lg'
-                      color='blue'
-                      className={`mt-2 lg:mt-4 xl:mt-6`}
-                    >
-                      Balances
-                    </TabButton>
-                    <TabButton
-                      active={page === 'account'}
-                      onClick={this.showTransactions}
-                      roundedClasses='rounded-tr-lg'
-                      color='blue'
-                      className={`mt-2 lg:mt-4 xl:mt-6`}
-                    >
-                      Transactions
-                    </TabButton>
-                  </div> */}
-                  <h6>
-                    Merchants will determine your credibility by your credit score and account balance.
-                    <br />
-                    <br/>
-                    Top up your account balance here:
-                  </h6>
-
-                  <TableRow>
-                    <span className='text-7xl'>
-                      200&nbsp;
-                    </span> 
-
-                    <span className='text-sm text-gray-600'>
-                      Your current Dai <DaiLogo /> balance
-                    </span>
-                  </TableRow>
-
-                  <TableRow
-                    noRule
-                    isHorizontal
-                  >
-                    <TransactionButton
-                      color='green'
-                    >
-                      Deposit
-                    </TransactionButton>
-                    <TransactionButton
-                    >
-                      Withdraw
-                    </TransactionButton>
-                  </TableRow>
-                </ContentBox>
-
-                <Button
-                  onClick={this.linkToQRCodeGenerate}
-                  className='fixed qrcode-button shadow-xl'
-                >
-                  <SVG src='/static/qrcode.svg'
-                    className='qrcode-svg'
-                  />
-                </Button>
-              </>
+      return <>
+        <div
+          className={classnames(
+            'animated', {
+              'zoomOut': !this.state.humanityDaoConnected,
+              'zoomIn': this.state.humanityDaoConnected
             }
-          </div>
+          )}
+        >
+          <ConnectWallet
+            userAddress={userAddress}
+          />
+
+          <ConnectHumanityDao
+            connected={this.state.humanityDaoConnected}
+          />
 
 
-          
-        </>
-      )
+          <ContentBox>
+            <CreditScore
+              label='Your credit score'
+              score={887}
+            />
+            {/* <StatRow
+              color='black'
+              title='Your credit score:'
+              value={creditScore(691)}
+            /> */}
+            {/* <StatRow
+              color='black'
+              title='Current deposit:'
+              value={'200'}
+              unit={<DaiLogo />}
+            /> */}
+          </ContentBox>
+        
+          <TokenQuery
+            userAddress={userAddress}
+            creditSystemAddress={creditSystemAddress}
+          >
+            {({ tokenQuery }) => <DaiBalanceContentBox
+              tokenQuery={tokenQuery}
+            />}
+          </TokenQuery>
+        </div>
+
+        <Button
+          onClick={this.linkToQRCodeGenerate}
+          className='fixed qrcode-button shadow-xl'
+        >
+          <SVG src='/static/qrcode.svg'
+            className='qrcode-svg'
+          />
+        </Button>
+      </>
     }
   }
 ))))

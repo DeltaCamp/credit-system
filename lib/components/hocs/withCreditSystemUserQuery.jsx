@@ -1,11 +1,11 @@
 import { graphql } from 'react-apollo'
 
-import { poolUserQuery } from 'lib/queries/poolUserQuery'
+import { creditSystemQuery } from 'lib/queries/creditSystemQuery'
 
 const userAddressFromProps = (props) => {
   let userAddress = props.userAddress
 
-  // Allows withPoolUserQuery to be chained w/ withNetworkAccountQuery
+  // Allows withcreditSystemQuery to be chained w/ withNetworkAccountQuery
   if (
     props.networkAccountQuery &&
     props.networkAccountQuery.account
@@ -17,9 +17,9 @@ const userAddressFromProps = (props) => {
   return userAddress
 }
 
-export function withPoolUserQuery (Component) {
-  return graphql(poolUserQuery, {
-    name: 'poolUserQuery',
+export function withcreditSystemQuery (Component) {
+  return graphql(creditSystemQuery, {
+    name: 'creditSystemQuery',
     skip: (props) => {
       return !props.creditSystemAddress || !userAddressFromProps(props)
     },

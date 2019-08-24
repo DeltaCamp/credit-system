@@ -5,7 +5,7 @@
   "author": "Brendan Asselstine & Charles Bergeron @ Delta Camp",
   "repository": "git@github.com:DeltaCamp/credit-system.git",
   "scripts": {
-    "dev": "next",
+    "dev": "yarn apply-registry && next dev",
     "build": "next build",
     "start": "next start",
     "apply-registry": "$(npm bin)/apply-registry -o artifacts",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
+    "apexcharts": "^3.8.4",
     "apollo-cache-inmemory": "^1.6.2",
     "apollo-client": "^2.6.3",
     "apollo-link-ethereum": "^0.1.2",
@@ -37,6 +38,7 @@
     "pluralize": "^8.0.0",
     "query-string": "^6.8.1",
     "react": "^16.9.0",
+    "react-apexcharts": "^1.3.3",
     "react-content-loader": "^4.2.2",
     "react-dom": "^16.9.0",
     "react-hint": "^3.2.0",

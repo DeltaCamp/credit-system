@@ -16,15 +16,10 @@
   to = '/static/:splat'
   status = 200
 
-[[redirects]]
-  from = '/pools/:creditSystemAddress/sponsor'
-  to = '/pools/[creditSystemAddress]/sponsor.html'
-  status = 200
-
-[[redirects]]
-  from = '/pools/*'
-  to = '/pools/[creditSystemAddress].html'
-  status = 200
+# [[redirects]]
+#   from = '/users/*'
+#   to = '/users/[userAddress].html'
+#   status = 200
 
 [[redirects]]
   from = '/_next/*'

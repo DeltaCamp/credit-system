@@ -15,14 +15,17 @@ export const ConnectWallet = withEthereumPermissionQuery(
 
       return <div
         className={classnames(
-          'w-10/12 mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-fastest',
+          'fixed t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-fastest',
           {
             'slideOutUp': ethereumPermission
           }
         )}
       >
-        <div className='flex flex-col justify-between h-full'>
+        <div className='flex flex-col justify-center h-full'>
           <div>
+            <h5>
+              Step 1.
+            </h5>
             <h1 className='text-2xl mb-6'>
               To interact with the Ethereum Credit System please permit transactions with your wallet.
             </h1>
@@ -37,7 +40,7 @@ export const ConnectWallet = withEthereumPermissionQuery(
             </Button>
           </div>
 
-        <p className='text-blue-300'>
+        <p className='text-blue-300 mt-24'>
           The Ethereum Credit System is a secure, audited in-person collateral tool.
         </p>
         </div>

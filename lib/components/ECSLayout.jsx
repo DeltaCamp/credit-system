@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'next/router'
 
-import { ECSCurrent } from 'lib/components/ECSCurrent'
 import { MainLayout } from 'lib/components/layout/MainLayout'
 import { DynamicApolloWrapper } from 'lib/components/DynamicApolloWrapper'
 
@@ -13,7 +12,7 @@ export const ECSLayout = withRouter(
         <MainLayout>
           <div className='flex flex-col justify-start p-2'>
             <DynamicApolloWrapper>
-              <ECSCurrent />
+              {this.props.children}
             </DynamicApolloWrapper>
           </div>
         </MainLayout>

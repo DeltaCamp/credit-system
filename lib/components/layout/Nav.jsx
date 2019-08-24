@@ -24,7 +24,7 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
       case 'this':
         return 'that'
       default:
-        return 'pool'
+        return 'or'
     }
   }
 
