@@ -82,7 +82,7 @@ export const DaiBalanceChart = class _DaiBalanceChart extends Component {
         },
         labels: {
           formatter: function (val) {
-            return Math.round(val)
+            return Math.abs(Math.round(val))
           }
         }
       }

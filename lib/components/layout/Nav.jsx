@@ -94,7 +94,7 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
           </div>
         </div>
 
-        <nav className='flex items-center justify-between p-4'>
+        <nav className='flex items-center justify-between py-4 px-6'>
             <Link href='/'>
               <a
                 className='w-5/12 inline-block font-condensed text-gray-600 no-underline'
