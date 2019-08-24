@@ -166,6 +166,7 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
               label='Your credit score'
               score={887}
             />
+            <p className='text-xxs text-blue-400 underline'>Learn more about your score</p>
           </ContentBox>
 
           <ContentBox>
