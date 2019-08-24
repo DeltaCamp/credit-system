@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import ReactTimeout from 'react-timeout'
-import SVG from 'react-inlinesvg'
-import FeatherIcon from 'feather-icons-react'
 import { withRouter } from 'next/router'
 import { withApollo } from 'react-apollo'
 
@@ -155,14 +153,15 @@ export const RecipientView = withRouter(withApollo(ReactTimeout(withCreditSystem
           </TokenQuery>
         </div>
 
-        <Button
+        
+        {/* <Button
           onClick={this.handleCreateCharge}
           className='fixed qrcode-button shadow-xl'
         >
           <SVG src='/static/qrcode.svg'
             className='qrcode-svg'
           />
-        </Button>
+        </Button> */}
       </>
     }
   }

@@ -79,9 +79,8 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
           <div
             className={classnames(
               'fixed forceOffScreen t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-fastest z-20', {
-                'pointer-events-none': !showStakeFunds,
+                // 'pointer-events-none': !showStakeFunds,
                 'slideInDown': showStakeFunds,
-                'slideOutUp': !showStakeFunds
               }
             )}
           >
@@ -89,7 +88,7 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
               Step 3.
             </h6>
             <h3>
-              Make a deposit of 100 Dai.
+              Stake a deposit:
             </h3>
             {this.props.showCheckmark ? <>
               <FeatherIcon
@@ -100,24 +99,29 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
               />
             </> : (
               <>
-                <h6>
-                  This will be kept as overdraft to pay merchants if your Dai balance falls below 0.
-                </h6>
+                <p className='text-sm text-gray-700'>
+                  100 Dai will be kept as overdraft protection to pay merchants if your Dai balance falls below 0.
+                </p>
+                <p className='text-sm text-gray-500 my-6'>
+                  You will need to approve the Dai spend prior to depositing.
+                </p>
 
-                <Button
-                  disabled={!needsApproval}
-                  onClick={this.handleApproval}>
-                  Approve 100 DAI
-                </Button>
+                <div className='flex justify-between my-6 mx-3'>
 
-                <br />
+                  <Button
+                    disabled={!needsApproval}
+                    onClick={this.handleApproval}
+                  >
+                    Approve Dai
+                  </Button>
 
-                <Button
-                  disabled={needsApproval}
-                  onClick={this.handleStake}
-                >
-                  Deposit 100 Dai
-                </Button>
+                  <Button
+                    disabled={needsApproval}
+                    onClick={this.handleStake}
+                  >
+                    Deposit Dai
+                  </Button>
+                </div>
               </>
             )}
             
