@@ -1,0 +1,50 @@
+{
+  "name": "credit-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Brendan Asselstine & Charles Bergeron @ Delta Camp",
+  "repository": "git@github.com:DeltaCamp/credit-system.git",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "apply-registry": "$(npm bin)/apply-registry -o artifacts",
+    "dist": "yarn build && next export"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.6.1",
+    "cssnano": "^4.1.10",
+    "postcss-easy-import": "^3.0.0",
+    "tailwindcss": "^1.0.4"
+  },
+  "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "apollo-cache-inmemory": "^1.6.2",
+    "apollo-client": "^2.6.3",
+    "apollo-link-ethereum": "^0.1.2",
+    "apollo-link-ethereum-mutations-ethersjs": "^0.1.5",
+    "apollo-link-ethereum-resolver-ethersjs": "^0.1.4",
+    "classnames": "^2.2.6",
+    "dapp-core": "^0.7.2",
+    "ethers": "^4.0.33",
+    "feather-icons-react": "^0.3.2",
+    "file-saver": "^2.0.2",
+    "graphql": "^14.4.2",
+    "localforage": "^1.7.3",
+    "next": "^9.0.4",
+    "next-fonts": "^0.17.0",
+    "next-images": "^1.1.2",
+    "pluralize": "^8.0.0",
+    "query-string": "^6.8.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-content-loader": "^4.2.2",
+    "react-hint": "^3.2.0",
+    "react-odometerjs": "^2.1.1",
+    "react-select": "^3.0.4",
+    "react-timeout": "^1.2.0",
+    "react-toastify": "^5.3.2",
+    "truffle-deploy-registry": "^0.5.1",
+    "url-parse": "^1.4.7"
+  }
+}

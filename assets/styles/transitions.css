@@ -1,0 +1,55 @@
+.trans {
+  transition: all .2s ease-out;
+}
+
+.trans-bg {
+  transition-property: background;
+}
+
+.trans-slowest {
+  transition-duration: 1.25s;
+}
+
+.trans-slower {
+  transition-duration: .75s;
+}
+
+.trans-slow {
+  transition-duration: .5s;
+}
+
+.trans-mediumer {
+  transition-duration: .425s;
+}
+
+.trans-mediumest {
+  transition-duration: .35s;
+}
+
+.trans-medium {
+  transition-duration: .225s;
+}
+
+.trans-fast {
+  transition-duration: .15s;
+}
+
+.trans-faster {
+  transition-duration: .075s;
+}
+
+.trans-fastest {
+  transition-duration: .05s;
+}
+
+.trans-fill-speed-fast {
+  transition-duration: 1.3s;
+}
+
+.trans-fill-speed-slow {
+  transition-duration: 1.7s;
+}
+
+.trans-ease-fill {
+  transition-timing-function: cubic-bezier(0.73, 0.4, 0.54, 1.1)
+}

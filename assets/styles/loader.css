@@ -1,0 +1,27 @@
+span {
+  --inactive: #9bc9eb;
+  --active: #98eeb3;
+  --speed: 1.2s;
+  --size: 30px;
+  --unit: 10px;
+}
+
+@keyframes spinner {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner-hidden .loading-indicator {
+  display: none;
+}
+
+.spinner-small .loading-indicator {
+  transform: scale3d(0.6, 0.6, 0.6);
+}
+
+.loading-indicator {
+  height: 100%;
+  padding-bottom: 5rem;
+  padding-top: 5rem;
+  width: 100%;
+}

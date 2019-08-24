@@ -1,0 +1,8 @@
+node_modules
+artifacts
+dist
+out
+.next
+.DS_Store
+.envrc
+networks/1234.json
