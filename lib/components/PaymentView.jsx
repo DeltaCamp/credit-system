@@ -5,22 +5,31 @@ import FeatherIcon from 'feather-icons-react'
 import { withRouter } from 'next/router'
 import { withApollo } from 'react-apollo'
 import { ethers } from 'ethers'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { CreditScore } from 'lib/components/CreditScore'
 import { DaiBalanceChart } from 'lib/components/DaiBalanceChart'
-import { Button, Input, Form } from 'lib/components/form'
+import { Button } from 'lib/components/form'
 import { shortenAddress } from 'lib/utils/shortenAddress'
 import { ContentBox } from 'lib/components/ContentBox'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
+import { withEthereumPermissionQuery } from 'lib/components/hocs/withEthereumPermissionQuery'
 
 const debug = require('debug')('pt:components:ChargeForm')
 
-export const PaymentView = withRouter(withApollo(ReactTimeout(withCreditSystemAddress(withNetworkAccountQuery(
+export const PaymentView = withEthereumPermissionQuery(withRouter(withApollo(ReactTimeout(withCreditSystemAddress(withNetworkAccountQuery(
   class _PaymentView extends Component {
+    handlePayment () {
+      
+    }
+
     render() {
-      const { router } = this.props
+      const { router, ethereumPermissionQuery } = this.props
       let { charge } = router.query
+
+      const { ethereumPermission } = ethereumPermissionQuery
+      console.log('PERMISSIONS: ', ethereumPermission)
 
       const decodedData = ethers.utils.defaultAbiCoder.decode(
         [
@@ -74,4 +83,4 @@ export const PaymentView = withRouter(withApollo(ReactTimeout(withCreditSystemAd
       </>
     }
   }
-)))))
+))))))
