@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactTimeout from 'react-timeout'
+import SVG from 'react-inlinesvg'
 import { withApollo } from 'react-apollo'
 
 import localForage from 'lib/localForage'
@@ -48,6 +49,10 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
         default:
           return 'pool'
       }
+    }
+
+    linkToQRCodeGenerate = () => {
+      alert('implement me')
     }
 
     render() {
@@ -117,6 +122,12 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
                       Transactions
                     </TabButton>
                   </div> */}
+                  <h6>
+                    Merchants will determine your credibility by your credit score and account balance.
+                    <br />
+                    <br/>
+                    Top up your account balance here:
+                  </h6>
 
                   <TableRow>
                     <span className='text-7xl'>
@@ -143,6 +154,15 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
                     </TransactionButton>
                   </TableRow>
                 </ContentBox>
+
+                <Button
+                  onClick={this.linkToQRCodeGenerate}
+                  className='fixed qrcode-button shadow-xl'
+                >
+                  <SVG src='/static/qrcode.svg'
+                    className='qrcode-svg'
+                  />
+                </Button>
               </>
             }
           </div>

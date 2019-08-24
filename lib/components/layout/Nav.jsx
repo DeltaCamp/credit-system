@@ -86,7 +86,7 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
                 >
                   <FeatherIcon
                     icon='x'
-                    className='h-full w-full shadow-xl border-2 border-black fill-current mx-auto my-3 text-black'
+                    className='h-full w-full shadow-xl border-2 border-black fill-current mx-auto my-5 text-black'
                   />
                 </button>
               </div>
@@ -94,10 +94,10 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
           </div>
         </div>
 
-        <nav className='flex items-center justify-between flex-wrap px-4'>
+        <nav className='flex items-center justify-between p-4'>
             <Link href='/'>
               <a
-                className='w-5/12 inline-block font-condensed text-pink-500 no-underline'
+                className='w-5/12 inline-block font-condensed text-gray-600 no-underline'
                 title='Home'
               >
                 <img
@@ -107,14 +107,14 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
               </a>
             </Link>
 
-          <div className='w-auto sm:hidden mt-1 text-white text-pink-500'>
+          <div className='w-auto sm:hidden mt-1 text-white text-gray-600'>
             <button
               onClick={this.showOffCanvasMenu}
               className='h-full w-full focus:outline-none active:outline-none'
             >
               <FeatherIcon
                 icon='menu'
-                className='h-full w-full bg-white border-2 border-pink-400 shadow-xl fill-current'
+                className='h-full w-full bg-white border-2 border-gray-200 shadow-xl fill-current'
                 style={{
                   padding: '2px'
                 }}

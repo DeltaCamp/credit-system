@@ -79,6 +79,7 @@ module.exports = {
         },
         blue: {
           ...colors.blue,
+          '400': '#379EF1',
         },
         purple: {
           ...colors.purple,

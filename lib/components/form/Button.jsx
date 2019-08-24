@@ -59,7 +59,7 @@ export function Button(props) {
   }
 
   if (backgroundClasses === undefined) {
-    backgroundClasses = `bg-${color}-500 hover:bg-${color}-300 active:bg-${color}-600`
+    backgroundClasses = `bg-${color}-400 hover:bg-${color}-300 active:bg-${color}-600`
   } 
   
   if (isError) {
@@ -68,8 +68,8 @@ export function Button(props) {
 
   if (isOutline) {
     backgroundClasses = `bg-white hover:bg-white focus:white active:bg-white`
-    borderClasses = 'border border-blue-500'
-    textClasses = `text-xxs sm:text-xs md:text-base text-blue-500`
+    borderClasses = 'border border-blue-400'
+    textClasses = `text-xxs sm:text-xs md:text-base text-blue-400`
   }
 
   className = classnames(
