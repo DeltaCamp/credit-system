@@ -30,8 +30,8 @@ export const StatRow = ({
 }) => {
   const colorClass = getColorClass(color)
   
-  let titleTextClass = `text-base lg:text-lg xl:text-xl ${colorClass}`,
-    valueTextClass = `font-bold text-base lg:text-lg xl:text-xl ${colorClass}`
+  let titleTextClass = `text-lg xl:text-xl ${colorClass}`,
+    valueTextClass = `font-bold text-lg xl:text-xl ${colorClass}`
 
   if (unit) {
     unit = <span className='text-white text-xs'>{unit}</span>
@@ -43,7 +43,7 @@ export const StatRow = ({
     <div
       className={`justify-center w-full ${titleTextClass}`}
     >
-      <span className='inline-block w-3/5'>
+      <span className='text-left inline-block w-3/5'>
         {title}
       </span>
 

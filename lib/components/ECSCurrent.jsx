@@ -8,6 +8,7 @@ import { StatRow } from 'lib/components/StatRow'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
 import { TabButton } from 'lib/components/TabButton'
+import { creditScore } from 'lib/utils/creditScore'
 
 const debug = require('debug')('pt:components:ECSCurrent')
 
@@ -44,10 +45,10 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
                   <StatRow
                     color='black'
                     title='Your credit score:'
-                    value={691}
+                    value={creditScore(691)}
                   />
                 </ContentBox>
-  
+                
                 <ContentBox
                 >
                   <div
