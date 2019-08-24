@@ -724,7 +724,7 @@ input[type="text"] {
 }
 
 .forceOffScreen {
-  pointer-events: none;
+  /* pointer-events: none; */
   transform: translate3d(0, -100%, 0);
 }
 

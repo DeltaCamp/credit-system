@@ -8,9 +8,9 @@ export const StakeFunds = class _StakeFunds extends PureComponent {
   render () {
     return <div
       className={classnames(
-        'fixed t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-fastest z-20', {
+        'fixed forceOffScreen t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-fastest z-20', {
           'pointer-events-none': this.props.hasStaked,
-          'forceOffScreen': this.props.hasStaked,
+          'slideInDown': !this.props.hasStaked,
           'slideOutUp': this.props.hasStaked
         }
       )}

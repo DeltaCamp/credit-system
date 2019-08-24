@@ -139,7 +139,6 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
         <div
           className={classnames(
             'animated z-1', {
-              'zoomOut': !this.state.humanityDaoConnected,
               // 'zoomIn': this.state.humanityDaoConnected
             }
           )}

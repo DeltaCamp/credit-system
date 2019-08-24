@@ -186,9 +186,9 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       return <>
         <div
           className={classnames(
-            'fixed t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 z-20 trans trans-faster', {
+            'fixed forceOffScreen t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-faster', {
               'slideInDown': this.state.showQrCode,
-              'forceOffScreen': !this.state.showQrCode,
+              'slideOutUp': !this.state.showQrCode,
               'pointer-events-none': !this.state.showQrCode
             }
           )}

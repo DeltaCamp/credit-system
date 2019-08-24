@@ -7,9 +7,10 @@ export const ConnectHumanityDao = class _ConnectHumanityDao extends PureComponen
   render () {
     return <div
       className={classnames(
-        'fixed t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-fastest', {
-          'pointer-events-none': this.props.connected,
-          'zoomOut': this.props.connected
+        'fixed forceOffScreen t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-fastest z-30', {
+          // 'pointer-events-none': this.props.connected,
+          'slideInDown': this.props.connected === false,
+          // 'slideOutUp': this.props.connected
         }
       )}
     >
