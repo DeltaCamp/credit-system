@@ -1,13 +1,13 @@
 import Head from 'next/head'
 
 export const Meta = ({ title }) => {
-  const defaultTitle = 'Ethereum Credit System'
+  const defaultTitle = 'Vero - the Ethereum Credit App'
   title = title ? `${title} - ${defaultTitle}` : defaultTitle
 
-  const url = `https://ecs.com`
+  const url = `https://vero-app.netlify.com`
   const description = '.'
   const keywords = 'deltacamp delta camp ethereum'
-  const twitterHandle = '@ECS_'
+  const twitterHandle = '@Vero_'
 
   return (
     <>
@@ -19,14 +19,14 @@ export const Meta = ({ title }) => {
 
         <link rel="stylesheet" href="https://use.typekit.net/ezg2vko.css" />
 
-        <link rel='icon' type='image/png' href='/static/favicon.png' />
+        <link rel='icon' type='image/png' href='/static/favicon@2x.png' />
         
         <link rel='stylesheet' href='/static/animate.css' />
 
         <meta name='theme-color' content='#282844' />
         <meta name='description' content={description} />
         <meta name='keywords' content={keywords} />
-        <meta name='author' content='Ethereum Credit System' />
+        <meta name='author' content='Vero - the Ethereum Credit App' />
         <meta name='copyright' content='&copy; 2019' />
       </Head>
     </>
