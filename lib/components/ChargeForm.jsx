@@ -269,7 +269,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
 
           {!this.state.recipientSelected ? <>
             <ContentBox className='mt-12'>
-              <p className='text-pink-600 text-xl px-8'>
+              <p className='text-pink-500 text-xl px-8'>
                 1. Who would you like to send a payment to?
               </p>
               <hr />
@@ -300,8 +300,8 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
                     onClick={(e) => {
                       e.preventDefault()
                       this.setRecipient({
-                        name: 'The Yard - Open Air',
-                        address: '0x6fC21092DA55B392b045eD78F4732bff3C580e2c'
+                        name: 'Room77',
+                        address: '0xFULLMEIN'
                       })
                     }}
                   >
@@ -315,8 +315,8 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
                     onClick={(e) => {
                       e.preventDefault()
                       this.setRecipient({
-                        name: 'The Yard - Open Air',
-                        address: '0x6fC21092DA55B392b045eD78F4732bff3C580e2c'
+                        name: 'Brewhaus',
+                        address: '0xLKMASDLKM'
                       })
                     }}
                   >
@@ -334,8 +334,10 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             </ContentBox>
             </> : <>
             <ContentBox className='mt-12'>
-              <p className='text-pink-600 text-xl px-8'>
-                2. How much would you like to send?
+              <p className='text-pink-500 text-xl px-8'>
+                  2. How much would you like to send to
+                  <br />
+                  "<span className='text-pink-700 font-bold'>{this.state.recipientInfo.name}</span>" ?
               </p>
               <hr
                 style={{
