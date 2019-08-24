@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import ReactTimeout from 'react-timeout'
 import dynamic from 'next/dynamic'
+import { ethers } from 'ethers'
 
 import { LoadingSpinner } from 'lib/components/LoadingSpinner'
+import { withCreditSystemUserQuery } from 'lib/components/hocs/withCreditSystemUserQuery'
 
 const debug = require('debug')('pt:components:CreditScore')
 
-export const CreditScore = ReactTimeout(class _CreditScore extends Component {
+export const CreditScore = withCreditSystemUserQuery(ReactTimeout(class _CreditScore extends Component {
   state = {
     showChart: false,
 
@@ -64,8 +66,7 @@ export const CreditScore = ReactTimeout(class _CreditScore extends Component {
           gradientToColors: ['#64F488'], // ending color, adjust this!
           inverseColors: false,
           opacityFrom: 1,
-          opacityTo: 1,
-          stops: [0, 100]
+          opacityTo: 1
         }
       },
       stroke: {
@@ -74,7 +75,7 @@ export const CreditScore = ReactTimeout(class _CreditScore extends Component {
       labels: [this.props.label],
       colors: ['#34EFA8'], // starting color, adjust this!
     },
-    series: [this.props.score * 0.1],
+    series: [0],
   }
 
   componentDidMount () {
@@ -105,6 +106,16 @@ export const CreditScore = ReactTimeout(class _CreditScore extends Component {
   }
 
   render() {
+    const { creditSystemUserQuery } = this.props
+    const { CreditSystem } = creditSystemUserQuery || {}
+
+    let series = [0]
+
+    if (CreditSystem) {
+      const { creditScore } = CreditSystem
+      series = [parseInt(ethers.utils.formatEther(creditScore), 10) * 0.1]
+    }
+
     const Chart = this.state.apex
 
     if (!Chart || !this.state.showChart) {
@@ -116,11 +127,11 @@ export const CreditScore = ReactTimeout(class _CreditScore extends Component {
     return <div className='mixed-chart'>
       <Chart
         options={this.state.options}
-        series={this.state.series}
+        series={series}
         type='radialBar'
         width='100%'
         height='300'
       />
     </div>
   }
-})
+}))

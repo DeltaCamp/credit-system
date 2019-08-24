@@ -158,13 +158,11 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             handleStake={this.handleStake}
           />
 
-
           <ContentBox
             isTight
           >
             <CreditScore
               label='Your credit score'
-              score={887}
             />
           </ContentBox>
 
@@ -181,14 +179,7 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             </Button>
           </ContentBox>
         
-          <TokenQuery
-            userAddress={userAddress}
-            creditSystemAddress={creditSystemAddress}
-          >
-            {({ tokenQuery }) => <DaiBalanceContentBox
-              tokenQuery={tokenQuery}
-            />}
-          </TokenQuery>
+          <DaiBalanceContentBox />
         </div>
 
         <Button

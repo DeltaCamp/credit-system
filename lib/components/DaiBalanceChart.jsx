@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import ReactTimeout from 'react-timeout'
 import dynamic from 'next/dynamic'
+import { ethers } from 'ethers'
 
 import { LoadingSpinner } from 'lib/components/LoadingSpinner'
+import { withTokenQuery } from 'lib/components/hocs/withTokenQuery'
+import { withCreditSystemUserQuery } from 'lib/components/hocs/withCreditSystemUserQuery'
 
-export const DaiBalanceChart = ReactTimeout(class _DaiBalanceChart extends Component {
+export const DaiBalanceChart = withCreditSystemUserQuery(withTokenQuery(ReactTimeout(class _DaiBalanceChart extends Component {
   state = {
     showChart: false,
     options: {
@@ -93,11 +96,11 @@ export const DaiBalanceChart = ReactTimeout(class _DaiBalanceChart extends Compo
     series: [
       {
         name: 'Balance',
-        data: [this.props.balanceOf]
+        data: [0]
       },
       {
         name: 'Overdraft Stake',
-        data: [this.props.stakeAmount]
+        data: [0]
       }
     ],
   }
@@ -133,6 +136,37 @@ export const DaiBalanceChart = ReactTimeout(class _DaiBalanceChart extends Compo
   render() {
     const Chart = this.state.apex
 
+    const { tokenQuery, creditSystemUserQuery } = this.props
+    const { CreditSystem } = creditSystemUserQuery || {}
+    const { Token } = tokenQuery || {}
+
+    const balance = {
+      name: 'Balance',
+      data: [0]
+    }
+
+    const overdraft = {
+      name: 'Overdraft Stake',
+      data: [0]
+    }
+
+    let series = [
+      balance,
+      overdraft
+    ]
+
+    if (Token) {
+      const { myBalance } = Token
+
+      balance.data = [parseInt(ethers.utils.formatEther(myBalance), 10)]
+    }
+
+    if (CreditSystem) {
+      const { stake } = CreditSystem
+
+      overdraft.data = [-parseInt(ethers.utils.formatEther(stake), 10)]
+    }
+
     if (!Chart || !this.state.showChart) {
       return <div className='bar-chart'>
         <LoadingSpinner />
@@ -142,7 +176,7 @@ export const DaiBalanceChart = ReactTimeout(class _DaiBalanceChart extends Compo
     return <div id='chart' className={this.props.className || ''}>
       <Chart
         options={this.state.options}
-        series={this.state.series}
+        series={series}
         type='bar'
         height='350'
         width='100%'
@@ -150,4 +184,4 @@ export const DaiBalanceChart = ReactTimeout(class _DaiBalanceChart extends Compo
     </div>
   }
 
-})
+})))

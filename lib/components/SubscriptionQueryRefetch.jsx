@@ -11,7 +11,7 @@ export const SubscriptionQueryRefetch = withApollo(class _SubscriptionQueryRefet
   static propTypes = {
     subscription: PropTypes.object.isRequired,
     variables: PropTypes.object,
-    query: PropTypes.object.isRequired,
+    query: PropTypes.object,
     queryKey: PropTypes.string.isRequired
   }
 
@@ -36,7 +36,11 @@ export const SubscriptionQueryRefetch = withApollo(class _SubscriptionQueryRefet
       subscriptions[queryKey] = {
         count: 1,
         subscription: this.props.client.subscribe({ query: this.props.subscription, variables: this.props.variables || {} })
-          .subscribe(data => { this.props.query.refetch() })
+          .subscribe(data => {
+            if (this.props.query) {
+              this.props.query.refetch()
+            }
+          })
       }
     } else {
       debug(`Adding subscription for ${queryKey}`)
