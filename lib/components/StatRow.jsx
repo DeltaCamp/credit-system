@@ -43,12 +43,12 @@ export const StatRow = ({
     <div
       className={`justify-center w-full ${titleTextClass}`}
     >
-      <span className='inline-block w-1/2 sm:w-3/5'>
+      <span className='inline-block w-3/5'>
         {title}
       </span>
 
       <span
-        className={`${valueTextClass} inline-block w-1/2 sm:w-2/5 text-right`}
+        className={`${valueTextClass} inline-block w-2/5 text-right`}
       >
         {value} <span className='font-headline'>{unit}</span>
       </span>

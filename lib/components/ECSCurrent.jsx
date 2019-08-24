@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import ReactTimeout from 'react-timeout'
 import { withApollo } from 'react-apollo'
 
 import { ConnectWallet } from 'lib/components/ConnectWallet'
+import { ContentBox } from 'lib/components/ContentBox'
 import { StatRow } from 'lib/components/StatRow'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
@@ -40,34 +39,40 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
             {
               !account ? <ConnectWallet /> :
               <>
-                <StatRow
-                  color='black'
-                  title='Your credit score:'
-                  value={691}
-                />
-  
-                <div
-                  className='tab-button-menu tab-button-menu--right flex items-center justify-center menu'
+                <ContentBox
                 >
-                  <TabButton
-                    active={page === 'account'}
-                    onClick={this.showBalances}
-                    roundedClasses='rounded-tl-lg'
-                    color='blue'
-                    className={`mt-2 lg:mt-4 xl:mt-6`}
+                  <StatRow
+                    color='black'
+                    title='Your credit score:'
+                    value={691}
+                  />
+                </ContentBox>
+  
+                <ContentBox
+                >
+                  <div
+                    className='tab-button-menu tab-button-menu--right flex items-center justify-center menu'
                   >
-                    Balances
-                  </TabButton>
-                  <TabButton
-                    active={page === 'account'}
-                    onClick={this.showTransactions}
-                    roundedClasses='rounded-tr-lg'
-                    color='blue'
-                    className={`mt-2 lg:mt-4 xl:mt-6`}
-                  >
-                    Transactions
-                  </TabButton>
-                </div>
+                    <TabButton
+                      active={page === 'account'}
+                      onClick={this.showBalances}
+                      roundedClasses='rounded-tl-lg'
+                      color='blue'
+                      className={`mt-2 lg:mt-4 xl:mt-6`}
+                    >
+                      Balances
+                    </TabButton>
+                    <TabButton
+                      active={page === 'account'}
+                      onClick={this.showTransactions}
+                      roundedClasses='rounded-tr-lg'
+                      color='blue'
+                      className={`mt-2 lg:mt-4 xl:mt-6`}
+                    >
+                      Transactions
+                    </TabButton>
+                  </div>
+                </ContentBox>
               </>
             }
           </div>

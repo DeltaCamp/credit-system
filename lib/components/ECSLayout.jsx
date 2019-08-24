@@ -11,7 +11,7 @@ export const ECSLayout = withRouter(
     render() {
       return <>
         <MainLayout>
-          <div className='flex flex-col justify-start p-8'>
+          <div className='flex flex-col justify-start p-2'>
             <DynamicApolloWrapper>
               <ECSCurrent />
             </DynamicApolloWrapper>

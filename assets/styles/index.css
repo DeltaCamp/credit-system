@@ -399,24 +399,16 @@ input[type="text"] {
 
 
 .fullscreen-message {
-  background-color: #312666;
+  background-color: #ffffff;
   background-image: linear-gradient(
     350deg,
-  #312666,
-  #3c1066
+  #ffffff,
+  #dfdfdf
   );
   background-position: center !important;
-  height: 100%;
-  width: 100%;
+  /* height: 100%;
+  width: 100%; */
   z-index: 10;
-}
-
-.fullscreen-message.blue {
-  background-image: linear-gradient(
-    20deg,
-    #064ed4,
-    #033db9
-  );
 }
 
 .flippable-container {

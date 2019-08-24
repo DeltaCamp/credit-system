@@ -44,7 +44,7 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
     const { creditSystemAddress } = this.props
     const page = this.getPage()
 
-    const offCanvasLinkClasses = `text-3xl flex-1 mt-2 sm:mt-3 text-black`
+    const offCanvasLinkClasses = `text-3xl flex-1 mt-2 sm:mt-3 text-blue-500 hover:text-blue-300`
 
     return (
       <>
@@ -94,7 +94,7 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
           </div>
         </div>
 
-        <nav className='flex items-center justify-between flex-wrap py-2 sm:py-4 px-10'>
+        <nav className='flex items-center justify-between flex-wrap px-4'>
             <Link href='/'>
               <a
                 className='w-5/12 inline-block font-condensed text-pink-500 no-underline'
@@ -150,8 +150,8 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
           </div>
           } */}
 
-          <div className='w-5/12 sm:w-auto flex sm:flex-grow sm:flex-1 items-center w-auto'>
-            <div className='text-sm flex-grow text-right'>
+          <div className='w-5/12 w-auto'>
+            <div className='text-sm text-right'>
               <EthereumNetworkStatus />
             </div>
           </div>

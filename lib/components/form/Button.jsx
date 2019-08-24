@@ -46,15 +46,15 @@ export function Button(props) {
   }
 
   if (textClasses === undefined) {
-    textClasses = 'text-base sm:text-lg md:text-lg lg:text-xl text-white'
+    textClasses = 'text-lg lg:text-xl text-white'
   }
 
   if (paddingClasses === undefined) {
-    paddingClasses = 'px-4 py-2 md:px-8 md:py-3 lg:px-16 lg:py-5'
+    paddingClasses = 'px-6 py-4'
   }
 
   if (roundedClasses === undefined) {
-    roundedClasses = 'rounded-full'
+    roundedClasses = 'rounded-lg'
   }
 
   if (backgroundClasses === undefined) {
