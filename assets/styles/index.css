@@ -124,7 +124,7 @@ button:not(.burger)[disabled] {
   grid-template-areas:
     "content"
     "header";
-  grid-template-rows: 90vh 10vh;
+  grid-template-rows: auto 74px;
   height: 100vh;
   position: relative;
   z-index: 2;
