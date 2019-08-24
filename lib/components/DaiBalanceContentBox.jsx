@@ -55,16 +55,6 @@ export const DaiBalanceContentBox =
           </h6>
         </TableRow>
         
-{/* 
-        <TableRow>
-          <span className='text-7xl'>
-            200&nbsp;
-          </span> 
-
-          <span className='text-sm text-gray-600'>
-            Your current Dai <DaiLogo /> balance
-          </span>
-        </TableRow> */}
 
         <TableRow
           noRule
