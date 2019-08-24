@@ -86,7 +86,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
         value.length <= INPUT_MAX_LENGTH
       ) {
         this.setState({
-          daiAmountInEther: parseInt(value, 10)
+          daiAmountInEther: value
         })
       }
     }
@@ -99,10 +99,13 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
           showQrCode: true
         })
 
+        console.log('ether: ', this.state.daiAmountInEther)
+        console.log(ethers.utils.parseEther(this.state.daiAmountInEther))
+
         const variables = {
           from: this.props.networkAccountQuery.account,
           to: this.state.recipientInfo.address,
-          value: this.state.daiAmountInEther
+          value: ethers.utils.parseEther(this.state.daiAmountInEther)
         }
 
         const charge = encodeCharge(variables)

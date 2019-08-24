@@ -7,12 +7,12 @@ export function withCreditSystemUserQuery (Component) {
   return withNetworkAccountQuery(graphql(creditSystemUserQuery, {
       name: 'creditSystemUserQuery',
       skip: (props) => {
-        return !props.networkAccountQuery.account
+        return !props.userAddress && !props.networkAccountQuery.account
       },
       options: (props) => {
         return {
           variables: {
-            userAddress: props.networkAccountQuery.account
+            userAddress: props.userAddress || props.networkAccountQuery.account
           }
         }
       }

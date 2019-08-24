@@ -18,8 +18,7 @@ export const DaiBalanceContentBox =
 
           <DaiBalanceChart
             label='Your credit score'
-            balanceOf={token.balanceOf}
-            stakeAmount={token.stakeAmount}
+            userAddress={this.props.userAddress}
             className='mt-8'
           />
 

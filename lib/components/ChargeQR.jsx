@@ -14,7 +14,7 @@ export const ChargeQR = withNetworkAccountQuery(class _ChargeQR extends PureComp
   }
 
   formatUrl () {
-    return `${process.env.NEXT_JS_BASE_URL}/merchant/charge?${queryString.stringify(this.props)}`
+    return `${process.env.NEXT_JS_BASE_URL}/recipient/charge?${queryString.stringify(this.props)}`
   }
 
   render () {
