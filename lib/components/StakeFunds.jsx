@@ -29,7 +29,7 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
         ]
       }
 
-      console.log({ variables })
+      // console.log({ variables })
 
       this.props.sendTransaction({variables})
     }
@@ -60,7 +60,7 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
       if (Token) {
         const { allowance } = Token
 
-        console.log('Token: ', Token)
+        // console.log('Token: ', Token)
 
         if (allowance.lt(ethers.utils.parseEther('100'))) {
           needsApproval = true
@@ -68,8 +68,7 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
       }
 
       if (CreditSystem) {
-
-        console.log('CreditSystem: ', CreditSystem)
+        // console.log('CreditSystem: ', CreditSystem)
 
         const { stake } = CreditSystem
 

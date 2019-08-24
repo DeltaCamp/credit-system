@@ -11,13 +11,12 @@ export function withTokenQuery (Component) {
       return !props.networkAccountQuery.account || !props.networkAccountQuery.networkId
     },
     options: (props) => {
-      console.log(props.networkAccountQuery.networkId)
       const variables = {
         userAddress: props.networkAccountQuery.account,
         spender: abiMapping.getAddress('CreditSystem', props.networkAccountQuery.networkId)
       }
 
-      console.log('token query variables: ', variables)
+      // console.log('token query variables: ', variables)
 
       return {
         variables
