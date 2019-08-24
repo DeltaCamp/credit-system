@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import FeatherIcon from 'feather-icons-react'
 
+import { Button } from 'lib/components/form'
 import { RecipientSalesChart } from 'lib/components/RecipientSalesChart'
 import { TxList } from 'lib/components/TxList'
 import { ContentBox } from 'lib/components/ContentBox'
@@ -27,6 +29,21 @@ export const RecipientDaiBalance =
           <TxList
           />
         </ContentBox>
+        
+        <ContentBox>
+          <Button
+            color='green'
+            onClick={this.handleCreateCharge}
+          >
+            <FeatherIcon
+              icon='send'
+              className='mx-auto text-white mb-2 mt-1'
+              height='28'
+              width='28'
+            /> Receive money
+            </Button>
+        </ContentBox>
+
 
         <ContentBox>
           <RecipientSalesChart

@@ -69,7 +69,7 @@ export function Button(props) {
   if (isOutline) {
     backgroundClasses = `bg-white hover:bg-white focus:white active:bg-white`
     borderClasses = 'border border-blue-400'
-    textClasses = `text-xxs sm:text-xs md:text-base text-blue-400`
+    textClasses = `text-sm text-blue-400`
   }
 
   className = classnames(

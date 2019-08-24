@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import ReactTimeout from 'react-timeout'
+import FeatherIcon from 'feather-icons-react'
 import { withRouter } from 'next/router'
 import { withApollo } from 'react-apollo'
 
@@ -10,9 +11,11 @@ import { LoadingSpinner } from 'lib/components/LoadingSpinner'
 import { ConnectWallet } from 'lib/components/ConnectWallet'
 import { ConnectHumanityDao } from 'lib/components/ConnectHumanityDao'
 import { StakeFunds } from 'lib/components/StakeFunds'
+import { SpenderQRScanner } from 'lib/components/SpenderQRScanner'
 import { ContentBox } from 'lib/components/ContentBox'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
+import { shortenAddress } from 'lib/utils/shortenAddress'
 
 const debug = require('debug')('pt:components:ChargeForm')
 
@@ -24,7 +27,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       humanityDaoConnected: false,
       showCheckmark: false,
       recipientSelected: false,
-      showRecipientQRScanner: false
+      showSpenderQrScanner: false
     }
 
     handleConnectDaoClick = async (e) => {
@@ -123,15 +126,24 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       )
     }
 
-    showRecipientQRScanner = (e) => {
+    showSpenderQrScanner = (e) => {
       if (e) {
         e.preventDefault()
       }
 
       this.setState({
-        showRecipientQRScanner: true
+        showSpenderQrScanner: true
       })
-      alert('showRecipientQRScanner ! then run setRecipient() and pass an object with keys "name" (of merchant) and "address"')
+    }
+
+    handleHideQrScanner = (e) => {
+      if (e) {
+        e.preventDefault()
+      }
+
+      this.setState({
+        showSpenderQrScanner: false
+      })
     }
 
     setRecipient = (recipientInfo) => {
@@ -139,6 +151,17 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
         recipientInfo,
         recipientSelected: true
       })
+    }
+
+    handleScan = (data) => {
+      if (data.length > 0) {
+        this.handleHideQrScanner()
+
+        this.setRecipient({
+          address: data
+        })
+        console.log(data)
+      }
     }
 
     render() {
@@ -258,6 +281,12 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             handleStake={this.handleStake}
           />
 
+          <SpenderQRScanner
+            handleHideQrScanner={this.handleHideQrScanner}
+            handleScan={this.handleScan}
+            showSpenderQrScanner={this.state.showSpenderQrScanner}
+          />
+
           <div className='r-0 t-0 absolute p-2 md:p-4'>
             <Button
               onClick={this.handleShowAccount}
@@ -272,8 +301,8 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
               <p className='text-pink-500 text-xl px-8'>
                 1. Who would you like to send a payment to?
               </p>
-              <hr />
-              <p className='text-gray-900 mt-6 ml-4 text-xl text-left'>
+            </ContentBox>
+              {/* <p className='text-gray-900 mt-6 ml-4 text-xl text-left'>
                 Recent:
               </p>
               
@@ -325,19 +354,37 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
                 </li>
               </ul>
 
-              <hr />
-              <Button
-                onClick={this.showRecipientQRScanner}
-              >
-                + Add new recipient
-              </Button>
-            </ContentBox>
+              <hr /> */}
+              <ContentBox>
+                <Button
+                  color='green'
+                  onClick={this.showSpenderQrScanner}
+                >
+                  <FeatherIcon
+                    icon='aperture'
+                    className='mx-auto text-white mb-2 mt-1'
+                    height='28'
+                    width='28'
+                  />
+                  Scan recipient's address
+                </Button>
+              </ContentBox>
+
+              <ContentBox>
+                <p>
+                  Choose from recent recipients:
+                </p>
+                <p className='border-dotted border rounded-lg bg-gray-300 text-white py-10 text-xl'>
+                  Feature coming soon!
+                </p>
+              </ContentBox>
             </> : <>
             <ContentBox className='mt-12'>
               <p className='text-pink-500 text-xl px-8'>
-                  2. How much would you like to send to
-                  <br />
-                  "<span className='text-pink-700 font-bold'>{this.state.recipientInfo.name}</span>" ?
+                2. How much would you like to send to
+                <br />
+                "<span className='text-blue-600 font-bold'>{shortenAddress(this.state.recipientInfo.address)}</span>" ?
+                {/* "<span className='text-pink-700 font-bold'>{this.state.recipientInfo.name}</span>" ? */}
               </p>
               <hr
                 style={{

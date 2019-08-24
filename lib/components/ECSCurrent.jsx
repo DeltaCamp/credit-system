@@ -176,21 +176,21 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
                 className='mx-auto text-white mb-2 mt-1'
                 height='28'
                 width='28'
-              /> Send Money
+              /> Send money
             </Button>
           </ContentBox>
         
           <DaiBalanceContentBox />
         </div>
 
-        <Button
+        {/* <Button
           onClick={this.handleCreateCharge}
           className='fixed qrcode-button shadow-xl'
         >
           <SVG src='/static/qrcode.svg'
             className='qrcode-svg'
           />
-        </Button>
+        </Button> */}
       </>
     }
   }

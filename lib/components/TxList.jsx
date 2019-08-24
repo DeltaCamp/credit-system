@@ -8,15 +8,23 @@ import { DaiLogo } from 'lib/components/DaiLogo'
 export const TxList = 
   withRouter(class _TxList extends Component {
 
-    showTransaction = (txId) => {
+    showTx = (txId) => {
       if (e) {
         e.preventDefault()
       }
 
-      this.props.router.push(
-        `/recipient/transaction/${txId}`,
-        `/recipient/transaction/${txId}`, { shallow: true }
-      )
+      // this.props.router.push(
+      //   `/recipient/transaction/${txId}`,
+      //   `/recipient/transaction/${txId}`, { shallow: true }
+      // )
+    }
+
+    runBatch = (e) => {
+      if (e) {
+        e.preventDefault()
+      }
+
+      // this.props.sendTransaction()
     }
 
     showTransactions = (e) => {
@@ -24,10 +32,10 @@ export const TxList =
         e.preventDefault()
       }
 
-      this.props.router.push(
-        `/recipient/transactions`,
-        `/recipient/transactions`, { shallow: true }
-      )
+      // this.props.router.push(
+      //   `/recipient/transactions`,
+      //   `/recipient/transactions`, { shallow: true }
+      // )
     }
 
     render () {
@@ -109,6 +117,7 @@ export const TxList =
         </li>
         <li className=' mt-5'>
           <Button
+            isOutline
             textClasses='text-sm text-white'
             className='w-6/12'
             onClick={this.showTransactions}
@@ -119,12 +128,12 @@ export const TxList =
             &nbsp;
           </div>
           <Button
-            color='green'
+            color='blue'
             textClasses='text-sm text-white'
             className='w-5/12'
-            onClick={this.showTransactions}
+            onClick={this.runBatch}
           >
-            Run Batch Transactions
+            Run Nightly Batch
           </Button>
         </li>
       </ul>
