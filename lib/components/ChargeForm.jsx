@@ -131,6 +131,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       this.setState({
         showRecipientQRScanner: true
       })
+      alert('showRecipientQRScanner ! then run setRecipient() and pass an object with keys "name" (of merchant) and "address"')
     }
 
     setRecipient = (recipientInfo) => {
@@ -268,29 +269,59 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
 
           {!this.state.recipientSelected ? <>
             <ContentBox className='mt-12'>
-              <p className='text-orange-500 text-xl px-8'>
-                Who would you like to send a payment to?
+              <p className='text-pink-600 text-xl px-8'>
+                1. Who would you like to send a payment to?
               </p>
               <hr />
               <p className='text-gray-900 mt-6 ml-4 text-xl text-left'>
                 Recent:
               </p>
               
-              <ul className='text-left ml-4 mb-6'>
-                <li className='my-3'>
-                  <a href='/' className='text-blue-700 no-underline text-lg'>
+              <ul className='text-left ml-2 mb-6'>
+                <li className=''>
+                  <Button  
+                    isText
+                    className='text-blue-600 no-underline text-lg w-full text-left py-4'
+                    onClick={(e) => {
+                      e.preventDefault()
+                      this.setRecipient({
+                        name: 'The Yard - Open Air',
+                        address: '0x6fC21092DA55B392b045eD78F4732bff3C580e2c'
+                      })
+                    }}
+                  >
                     The Yard - Open Air
-                  </a>
+                  </Button>
                 </li>
-                <li className='my-3'>
-                  <a href='/' className='text-blue-700 no-underline text-lg'>
+                <li className=''>
+                  <Button  
+                    isText
+                    className='text-blue-600 no-underline text-lg w-full text-left py-4'
+                    onClick={(e) => {
+                      e.preventDefault()
+                      this.setRecipient({
+                        name: 'The Yard - Open Air',
+                        address: '0x6fC21092DA55B392b045eD78F4732bff3C580e2c'
+                      })
+                    }}
+                  >
                     Room77
-                  </a>
+                  </Button>
                 </li>
-                <li className='my-3'>
-                  <a href='/' className='text-blue-700 no-underline text-lg'>
+                <li className=''>
+                  <Button  
+                    isText
+                    className='text-blue-600 no-underline text-lg w-full text-left py-4'
+                    onClick={(e) => {
+                      e.preventDefault()
+                      this.setRecipient({
+                        name: 'The Yard - Open Air',
+                        address: '0x6fC21092DA55B392b045eD78F4732bff3C580e2c'
+                      })
+                    }}
+                  >
                     Brewhaus
-                  </a>
+                  </Button>
                 </li>
               </ul>
 
@@ -298,13 +329,13 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
               <Button
                 onClick={this.showRecipientQRScanner}
               >
-                + Add New Recipient
+                + Add new recipient
               </Button>
             </ContentBox>
             </> : <>
             <ContentBox className='mt-12'>
-              <p className='text-orange-500 text-xl px-8'>
-                How much would you like to send?
+              <p className='text-pink-600 text-xl px-8'>
+                2. How much would you like to send?
               </p>
               <hr
                 style={{
