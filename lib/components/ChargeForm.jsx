@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import ReactTimeout from 'react-timeout'
-import SVG from 'react-inlinesvg'
 import { withRouter } from 'next/router'
 import { withApollo } from 'react-apollo'
 
@@ -10,6 +9,7 @@ import { Button, Input, Form } from 'lib/components/form'
 import { LoadingSpinner } from 'lib/components/LoadingSpinner'
 import { ConnectWallet } from 'lib/components/ConnectWallet'
 import { ConnectHumanityDao } from 'lib/components/ConnectHumanityDao'
+import { StakeFunds } from 'lib/components/StakeFunds'
 import { ContentBox } from 'lib/components/ContentBox'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
@@ -20,8 +20,9 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
   class _ChargeForm extends Component {
     state = {
       daiAmountInEther: '',
-      qrCode: false, 
-      humanityDaoConnected: false
+      showQrCode: false, 
+      humanityDaoConnected: false,
+      showCheckmark: false
     }
 
     handleConnectDaoClick = async (e) => {
@@ -36,12 +37,34 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       await localForage.setItem('humanityDaoConnected', true)
     }
 
+    handleStake = async (e) => {
+      if (e) {
+        e.preventDefault()
+      }
+
+      this.setState({
+        showCheckmark: true
+      })
+
+      this.props.setTimeout(() => {
+        this.setState({
+          hasStaked: true
+        })
+      }, 1500)
+
+      await localForage.setItem('hasStaked', true)
+    }
+
     async componentDidMount () {
       if (await localForage.getItem('humanityDaoConnected')) {
         this.handleConnectDaoClick()
       }
 
-     
+      if (await localForage.getItem('hasStaked')) {
+        this.setState({
+          hasStaked: true
+        })
+      }
     }
 
     handleAmountTextInputChange = (e) => {
@@ -64,7 +87,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
 
       if (this.state.daiAmountInEther > 0) {
         this.setState({
-          qrCode: true
+          showQrCode: true
         })
 
         this.props.setTimeout(() => {
@@ -82,9 +105,20 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       }
 
       this.setState({
-        qrCode: false
+        showQrCode: false
       })
 
+    }
+
+    handleShowAccount = (e) => {
+      if (e) {
+        e.preventDefault()
+      }
+
+      this.props.router.push(
+        `/`,
+        `/`, { shallow: true }
+      )
     }
 
     render() {
@@ -133,9 +167,9 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
         <div
           className={classnames(
             'fixed t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 z-20 trans trans-faster', {
-              'fadeOutDown': !this.state.qrCode,
-              'fadeInUp': this.state.qrCode,
-              'pointer-events-none': !this.state.qrCode
+              'slideInDown': this.state.showQrCode,
+              'forceOffScreen': !this.state.showQrCode,
+              'pointer-events-none': !this.state.showQrCode
             }
           )}
           style={{
@@ -151,21 +185,22 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             </Button>
           </div>
           
-          <div className='flex flex-col justify-center items-center h-full'>
-            
-
+          <div className='flex flex-col justify-center items-center'>
             {
               this.state.qrCodeReady ?
                 <>
                   <ContentBox
+                    className='mt-16'
                   >
-                    <div className='text-4xl'>
-                      &nbsp;
-                    </div>
-                    <p className='text-2xl mt-24'>
+                    <p className='text-2xl'>
                       Have the staff scan this:
                     </p>
-                    <LoadingSpinner />
+                    <img
+                      className='mx-auto'
+                      src='/static/qart1.png'
+                      width='200'
+                      height='200'
+                    />
                   </ContentBox>
                 </> : <>
                   <div className='text-4xl'>
@@ -182,9 +217,9 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
 
         <div
           className={classnames(
-            'animated', {
+            'animated z-1', {
               'zoomOut': !this.state.humanityDaoConnected,
-              'zoomIn': this.state.humanityDaoConnected
+              // 'zoomIn': this.state.humanityDaoConnected
             }
           )}
         >
@@ -194,11 +229,27 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
 
           <ConnectHumanityDao
             connected={this.state.humanityDaoConnected}
+            handleConnectDaoClick={this.handleConnectDaoClick}
           />
 
-          <ContentBox>
-            <p className='text-blue-300 text-lg'>
-              Create a new payment to a merchant (ie. bar, store, etc.)
+          <StakeFunds
+            hasStaked={this.state.hasStaked}
+            showCheckmark={this.state.showCheckmark}
+            handleStake={this.handleStake}
+          />
+
+          <div className='r-0 t-0 absolute p-2 md:p-4'>
+            <Button
+              onClick={this.handleShowAccount}
+              isText
+            >
+              &#10006;
+            </Button>
+          </div>
+
+          <ContentBox className='mt-16'>
+            <p className='text-blue-300 text-xl px-8'>
+              How much would you like to send?
             </p>
             <hr
               style={{
@@ -230,8 +281,9 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
 
             <Button
               onClick={this.handleSubmit}
+              disabled={this.state.daiAmountInEther < 1}
             >
-              + Create
+              + Create Send Code
             </Button>
           </ContentBox>
         </div>

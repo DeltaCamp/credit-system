@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import ReactTimeout from 'react-timeout'
 import dynamic from 'next/dynamic'
 
-export const DaiBalanceChart = class _DaiBalanceChart extends Component {
+import { LoadingSpinner } from 'lib/components/LoadingSpinner'
 
+export const DaiBalanceChart = ReactTimeout(class _DaiBalanceChart extends Component {
   state = {
+    showChart: false,
     options: {
       chart: {
         stacked: true,
@@ -107,6 +110,12 @@ export const DaiBalanceChart = class _DaiBalanceChart extends Component {
         loading: () => 0
       })
     })
+
+    this.props.setTimeout(() => {
+      this.setState({
+        showChart: true
+      })
+    }, 2500)
   }
 
   updateChart() {
@@ -124,7 +133,11 @@ export const DaiBalanceChart = class _DaiBalanceChart extends Component {
   render() {
     const Chart = this.state.apex
 
-    if (!Chart) { return null }
+    if (!Chart || !this.state.showChart) {
+      return <div className='bar-chart'>
+        <LoadingSpinner />
+      </div>
+    }
 
     return <div id='chart' className={this.props.className || ''}>
       <Chart
@@ -137,4 +150,4 @@ export const DaiBalanceChart = class _DaiBalanceChart extends Component {
     </div>
   }
 
-}
+})

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import ReactTimeout from 'react-timeout'
 import SVG from 'react-inlinesvg'
+import FeatherIcon from 'feather-icons-react'
 import { withRouter } from 'next/router'
 import { withApollo } from 'react-apollo'
 
@@ -11,6 +12,7 @@ import { DaiBalanceContentBox } from 'lib/components/DaiBalanceContentBox'
 import { CreditScore } from 'lib/components/CreditScore'
 import { ConnectWallet } from 'lib/components/ConnectWallet'
 import { ConnectHumanityDao } from 'lib/components/ConnectHumanityDao'
+import { StakeFunds } from 'lib/components/StakeFunds'
 import { ContentBox } from 'lib/components/ContentBox'
 import { TokenQuery } from 'lib/components/TokenQuery'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
@@ -21,7 +23,9 @@ const debug = require('debug')('pt:components:ECSCurrent')
 export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAddress(withNetworkAccountQuery(
   class _ECSCurrent extends Component {
     state = {
-      humanityDaoConnected: false
+      humanityDaoConnected: false,
+      hasStaked: false,
+      showCheckmark: false
     }
 
     handleConnectDaoClick = async (e) => {
@@ -36,9 +40,33 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       await localForage.setItem('humanityDaoConnected', true)
     }
 
+    handleStake = async (e) => {
+      if (e) {
+        e.preventDefault()
+      }
+
+      this.setState({
+        showCheckmark: true
+      })
+
+      this.props.setTimeout(() => {
+        this.setState({
+          hasStaked: true
+        })
+      }, 1500)
+
+      await localForage.setItem('hasStaked', true)
+    }
+
     async componentDidMount () {
       if (await localForage.getItem('humanityDaoConnected')) {
         this.handleConnectDaoClick()
+      }
+
+      if (await localForage.getItem('hasStaked')) {
+        this.setState({
+          hasStaked: true
+        })
       }
     }
     
@@ -110,9 +138,9 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       return <>
         <div
           className={classnames(
-            'animated', {
+            'animated z-1', {
               'zoomOut': !this.state.humanityDaoConnected,
-              'zoomIn': this.state.humanityDaoConnected
+              // 'zoomIn': this.state.humanityDaoConnected
             }
           )}
         >
@@ -122,6 +150,13 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
 
           <ConnectHumanityDao
             connected={this.state.humanityDaoConnected}
+            handleConnectDaoClick={this.handleConnectDaoClick}
+          />
+
+          <StakeFunds
+            hasStaked={this.state.hasStaked}
+            showCheckmark={this.state.showCheckmark}
+            handleStake={this.handleStake}
           />
 
 
@@ -138,7 +173,12 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             <Button
               onClick={this.handleCreateCharge}
             >
-              + Create a new Charge
+              <FeatherIcon
+                icon='send'
+                className='mx-auto text-white mb-2 mt-1'
+                height='28'
+                width='28'
+              /> Send Money
             </Button>
           </ContentBox>
         

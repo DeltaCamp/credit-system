@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-// import Chart from 'react-apexcharts'
+import ReactTimeout from 'react-timeout'
 import dynamic from 'next/dynamic'
+
+import { LoadingSpinner } from 'lib/components/LoadingSpinner'
 
 const debug = require('debug')('pt:components:CreditScore')
 
-export const CreditScore = class _CreditScore extends Component {
+export const CreditScore = ReactTimeout(class _CreditScore extends Component {
   state = {
+    showChart: false,
+
     options: {
       chart: {
         fontFamily: 'Soleil, Helvetica, Arial, sans-serif'
@@ -80,6 +84,12 @@ export const CreditScore = class _CreditScore extends Component {
         loading: () => 0
       })
     })
+
+    this.props.setTimeout(() => {
+      this.setState({
+        showChart: true
+      })
+    }, 2000)
   }
 
   updateChart() {
@@ -97,7 +107,11 @@ export const CreditScore = class _CreditScore extends Component {
   render() {
     const Chart = this.state.apex
 
-    if (!Chart) { return null }
+    if (!Chart || !this.state.showChart) {
+      return <div className='mixed-chart'>
+        <LoadingSpinner />
+      </div>
+    }
 
     return <div className='mixed-chart'>
       <Chart
@@ -109,4 +123,4 @@ export const CreditScore = class _CreditScore extends Component {
       />
     </div>
   }
-}
+})

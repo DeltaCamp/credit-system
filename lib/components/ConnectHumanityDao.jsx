@@ -21,7 +21,7 @@ export const ConnectHumanityDao = class _ConnectHumanityDao extends PureComponen
       </h3>
       <br />
       <Button
-        onClick={this.handleConnectDaoClick}
+        onClick={this.props.handleConnectDaoClick}
       >
         Connect HumanityDAO
       </Button>

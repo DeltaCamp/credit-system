@@ -102,12 +102,12 @@ form:after {
 input:not([type='submit'])[disabled],
 textarea[disabled],
 button:not(.burger)[disabled] {
-  @apply border-transparent bg-white text-purple-400 opacity-50 cursor-not-allowed !important;
+  @apply border-transparent bg-blue-200 text-white cursor-not-allowed !important;
 } 
 
 input[type='submit'][disabled],
 button:not(.burger)[disabled] {
-  @apply border-transparent bg-white text-purple-700 cursor-not-allowed;
+  @apply border-transparent bg-blue-200 text-white cursor-not-allowed;
 }
 
 
@@ -720,4 +720,17 @@ input[type="text"] {
   margin: auto;
   height: 40px;
   width: 40px;
+}
+
+.forceOffScreen {
+  pointer-events: none;
+  transform: translate3d(0, -100%, 0);
+}
+
+.mixed-chart {
+  min-height: 230px;
+}
+
+.bar-chart {
+  min-height: 400px;
 }

@@ -105,8 +105,8 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
                       'text-black': page === 'create'
                     }
                   )
-                  }>
-                  Create New Charge
+                }>
+                  Send Money
                 </button>
               </div>
             </div>
