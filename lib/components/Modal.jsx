@@ -73,7 +73,7 @@ export const Modal = class _Modal extends PureComponent {
           />
 
           <div className={modalClassNames}>
-            {this.props.onClose && <div className='r-0 t-0 absolute p-2 md:p-4'>
+            {this.props.onClose && <div className='r-0 t-0 fixed p-2 md:p-4'>
                 <Button
                   onClick={this.props.onClose}
                   isText

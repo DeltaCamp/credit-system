@@ -84,7 +84,7 @@ export const SpenderQRScanner = class _SpenderQRScanner extends Component {
         </div>
       }
 
-      <div className='r-0 t-0 absolute p-2 md:p-4'>
+      <div className='r-0 t-0 fixed p-2 md:p-4'>
         <Button
           onClick={this.hideEverything}
           isText

@@ -219,7 +219,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             backgroundColor: '#F9FBFD'
           }}
         >
-          <div className='r-0 t-0 absolute p-2 md:p-4'>
+          <div className='r-0 t-0 fixed p-2 md:p-4'>
             <Button
               onClick={this.handleCloseQRCodeModal}
               isText
@@ -287,7 +287,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             showSpenderQrScanner={this.state.showSpenderQrScanner}
           />
 
-          <div className='r-0 t-0 absolute p-2 md:p-4'>
+          <div className='r-0 t-0 fixed p-2 md:p-4'>
             <Button
               onClick={this.handleShowAccount}
               isText
