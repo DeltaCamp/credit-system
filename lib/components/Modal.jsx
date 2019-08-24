@@ -57,7 +57,7 @@ export const Modal = class _Modal extends PureComponent {
     )
 
     const modalClassNames = classnames(
-      'z-20 transition-fast-ease-out relative bg-purple-1000 text-purple-300 flex flex-col border-2 md:border-4 border-purple-800 rounded py-4 px-3 md:pt-10 md:pb-6 md:px-4 lg:pt-10 lg:pb-10 lg:px-10',
+      'z-20 transition-fast-ease-out relative bg-purple-900 text-purple-300 flex flex-col border-2 md:border-4 border-purple-800 rounded py-4 px-3 md:pt-10 md:pb-6 md:px-4 lg:pt-10 lg:pb-10 lg:px-10',
       this.props.className,
       {
         'scale-0': !isOpen

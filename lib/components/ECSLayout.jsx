@@ -11,16 +11,10 @@ export const ECSLayout = withRouter(
     render() {
       return <>
         <MainLayout>
-          <div className='flex flex-col justify-start sm:justify-center main-content--vertical-aligner'>
-            <div className='flex justify-center'>
-              <div className='main-content--vertical-offset'>
-                <div className='spinner-small'>
-                  <DynamicApolloWrapper>
-                    <ECSCurrent />
-                  </DynamicApolloWrapper>
-                </div>
-              </div>
-            </div>
+          <div className='flex flex-col justify-start p-8'>
+            <DynamicApolloWrapper>
+              <ECSCurrent />
+            </DynamicApolloWrapper>
           </div>
         </MainLayout>
       </>

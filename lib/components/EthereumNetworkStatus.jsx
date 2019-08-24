@@ -32,16 +32,16 @@ export const EthereumNetworkStatus = function _EthereumNetworkStatus() {
                       </div>
                     } else {
                       const networkString = <span
-                        className='block sm:inline-block -mt-1 sm:mt-0 py-1 sm:px-2 rounded-lg sm:bg-purple-1000 sm:text-purple-500 capitalize'
+                        className='block sm:inline-block -mt-1 sm:mt-0 py-1 sm:px-2 rounded-lg sm:bg-blue-900 sm:text-blue-500 capitalize'
                       >{networkIdToName(networkId)}</span>
 
                       if (!hasWeb3Available) {
                         innerContent = networkString
                       } else if (networkId && account) {
                         innerContent =
-                          <span className='leading-none text-purple-500 hover:text-purple-500 trans'>
+                          <span className='leading-none text-blue-500 hover:text-blue-500 trans'>
                             {<EtherscanAddressLink
-                              className='text-purple-500 hover:text-purple-300'
+                              className='text-blue-500 hover:text-blue-300'
                               address={account}
                             >
                               {utils.shortenAddress(account)}
@@ -52,7 +52,7 @@ export const EthereumNetworkStatus = function _EthereumNetworkStatus() {
                           <a
                             href='#'
                             onClick={() => web3.askEthereumPermissions()}
-                            className='underline text-purple-500 hover:text-white'
+                            className='underline text-blue-500 hover:text-white'
                           >
                             Connect Wallet
                           </a>

@@ -33,14 +33,14 @@ export const MainLayout = ({ title, children }) => (
         title={title}
       />
 
+      <div className='main-content'>
+        {children}
+      </div>
+
       <div className='main-nav spinner-hidden'>
         <DynamicApolloWrapper>
           <Nav />
         </DynamicApolloWrapper>
-      </div>
-
-      <div className='main-content'>
-        {children}
       </div>
     </div>
   </>

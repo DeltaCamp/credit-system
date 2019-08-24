@@ -4,6 +4,8 @@ import Link from 'next/link'
 import FeatherIcon from 'feather-icons-react'
 import { withRouter } from 'next/router'
 
+import EcsLogo from 'assets/images/ecs-logo.svg'
+
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { EthereumNetworkStatus } from 'lib/components/EthereumNetworkStatus'
 
@@ -26,6 +28,12 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
     }
   }
 
+  showOffCanvasMenu = () => {
+    this.setState({
+      showOffCanvasMenu: true
+    })
+  }
+
   hideOffCanvasMenu = () => {
     this.setState({
       showOffCanvasMenu: false
@@ -36,115 +44,84 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
     const { creditSystemAddress } = this.props
     const page = this.getPage()
 
-    const offCanvasLinkClasses = `text-3xl flex-1 mt-2 sm:mt-3`
+    const offCanvasLinkClasses = `text-3xl flex-1 mt-2 sm:mt-3 text-black`
 
     return (
       <>
         <div
-            className={classnames(
-              'bg-purple-900 w-full h-full fixed t-0 l-0 r-0 b-0',
-              'text-center align-center text-white trans trans-medium'
-            )}
-            style={{
-              zIndex: 10000,
-              transition: '',
-              transform: !this.state.showOffCanvasMenu ? 'translateY(100%)' : 'translateY(0%)'
-            }}
-          >
-            <button
-              onClick={this.hideOffCanvasMenu}
-              className='focus:outline-none active:outline-none'
-            >
-              <FeatherIcon
-                icon='x'
-                className='border-2 border-purple-300 fill-current mx-auto my-3 text-purple-200'
-              />
-            </button>
+          className={classnames(
+            'bg-white w-full h-full fixed t-0 l-0 r-0 b-0',
+            'text-center align-center text-white trans trans-medium'
+          )}
+          style={{
+            zIndex: 10000,
+            transition: '',
+            transform: !this.state.showOffCanvasMenu ? 'translateY(100%)' : 'translateY(0%)'
+          }}
+        >
+          <div className='main-grid'>
+            <div className='main-content'>
+              <div
+                className='flex flex-col items-center py-24'
+              >
+                <button
+                  onClick={this.showAccount}
+                  className={classnames(
+                    offCanvasLinkClasses, {
+                      'text-black': page !== 'account',
+                      'text-black': page === 'account'
+                    }
+                  )
+                  }>
+                  Account
+                </button>
+              </div>
+            </div>
 
-            <div
-              className='flex flex-col items-center py-24'
-            >
-              <button
-                onClick={this.showLearn}
-                className={classnames(
-                  offCanvasLinkClasses, {
-                    'text-blue-600': page !== 'learn',
-                    'text-white': page === 'learn'
-                  }
-                )
-              }>
-                Learn
-              </button>
-              <button
-                onClick={this.showFaq}
-                className={classnames(
-                  offCanvasLinkClasses, {
-                    'text-blue-600': page !== 'faq',
-                    'text-white': page === 'faq'
-                  }
-                )
-              }>
-                FAQ
-              </button>
-              <button
-                onClick={this.showAccount}
-                className={classnames(
-                  offCanvasLinkClasses, {
-                    'text-blue-600': page !== 'account',
-                    'text-white': page === 'account'
-                  }
-                )
-              }>
-                Account
-              </button>
-              <button
-                onClick={this.showPool}
-                className={classnames(
-                  offCanvasLinkClasses, {
-                    'text-blue-600': page !== 'pool',
-                    'text-white': page === 'pool'
-                  }
-                )
-              }>
-                Pool
-              </button>
-              {/* <button
-                onClick={this.showWinners}
-                className={classnames(
-                  `text-xl flex-1 mt-2 sm:mt-3`, {
-                    'text-orange-600': page !== 'winners',
-                    'text-white': page === 'winners'
-                  }
-                )
-              }>
-              Winners
-            </button> */}
+            <div className='main-nav spinner-hidden'>
+              <div className='h-full'>
+                <button
+                  onClick={this.hideOffCanvasMenu}
+                  className='focus:outline-none active:outline-none'
+                >
+                  <FeatherIcon
+                    icon='x'
+                    className='h-full w-full shadow-xl border-2 border-black fill-current mx-auto my-3 text-black'
+                  />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <nav className='flex items-center justify-between flex-wrap px-3 py-2 sm:px-10 sm:py-4'>
-          <div className='w-1/3 sm:w-auto sm:flex-grow sm:flex-1 items-center text-white'>
+        <nav className='flex items-center justify-between flex-wrap py-2 sm:py-4 px-10'>
             <Link href='/'>
               <a
-                className=''
+                className='w-5/12 inline-block font-condensed text-pink-500 no-underline'
                 title='Home'
               >
-                Logo
+                <img
+                  src={EcsLogo}
+                  className='img-fluid'
+                />
               </a>
             </Link>
-          </div>
 
-          <div className='w-1/3 sm:w-auto sm:hidden text-center mt-1 px-4 text-white text-purple-700'>
+          <div className='w-auto sm:hidden mt-1 text-white text-pink-500'>
             <button
               onClick={this.showOffCanvasMenu}
-              className='focus:outline-none active:outline-none'
+              className='h-full w-full focus:outline-none active:outline-none'
             >
               <FeatherIcon
                 icon='menu'
-                className='bg-purple-1100 px-1 fill-current'
+                className='h-full w-full bg-white border-2 border-pink-400 shadow-xl fill-current'
+                style={{
+                  padding: '2px'
+                }}
               />
             </button>
           </div>
+
 
           {/* {showLinks && <div
             className='hidden sm:block sm:flex-grow text-center py-2 px-4 text-white'
@@ -156,7 +133,7 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
               onClick={this.showLearn}
               roundedClasses='rounded-tl-full rounded-bl-full'
               className={`mt-2 sm:mt-3`}
-              color='blue'
+              color='white'
             >
               Learn
             </TabButton>
@@ -173,7 +150,7 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
           </div>
           } */}
 
-          <div className='w-1/3 sm:w-auto flex sm:flex-grow sm:flex-1 items-center w-auto'>
+          <div className='w-5/12 sm:w-auto flex sm:flex-grow sm:flex-1 items-center w-auto'>
             <div className='text-sm flex-grow text-right'>
               <EthereumNetworkStatus />
             </div>

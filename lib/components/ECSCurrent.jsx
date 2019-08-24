@@ -5,6 +5,7 @@ import ReactTimeout from 'react-timeout'
 import { withApollo } from 'react-apollo'
 
 import { ConnectWallet } from 'lib/components/ConnectWallet'
+import { StatRow } from 'lib/components/StatRow'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
 import { TabButton } from 'lib/components/TabButton'
@@ -39,36 +40,40 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
             {
               !account ? <ConnectWallet /> :
               <>
-                Just keeps coming back again
+                <StatRow
+                  color='black'
+                  title='Your credit score:'
+                  value={691}
+                />
+  
+                <div
+                  className='tab-button-menu tab-button-menu--right flex items-center justify-center menu'
+                >
+                  <TabButton
+                    active={page === 'account'}
+                    onClick={this.showBalances}
+                    roundedClasses='rounded-tl-lg'
+                    color='blue'
+                    className={`mt-2 lg:mt-4 xl:mt-6`}
+                  >
+                    Balances
+                  </TabButton>
+                  <TabButton
+                    active={page === 'account'}
+                    onClick={this.showTransactions}
+                    roundedClasses='rounded-tr-lg'
+                    color='blue'
+                    className={`mt-2 lg:mt-4 xl:mt-6`}
+                  >
+                    Transactions
+                  </TabButton>
+                </div>
               </>
             }
           </div>
 
 
-          <div
-            className='tab-button-menu tab-button-menu--right flex items-center justify-center menu'
-          >
-            <TabButton
-              count={1}
-              active={page === 'account'}
-              onClick={this.showAccount}
-              roundedClasses='rounded-tl-full rounded-bl-full'
-              color='blue'
-              className={`mt-2 lg:mt-4 xl:mt-6`}
-            >
-              Account
-            </TabButton>
-            <TabButton
-              count={2}
-              active={page === 'pool'}
-              onClick={this.showPool}
-              roundedClasses='rounded-tr-full rounded-br-full'
-              color='purple'
-              className={`mt-2 lg:mt-4 xl:mt-6`}
-            >
-              Pool
-            </TabButton>
-          </div>
+          
         </>
       )
     }
