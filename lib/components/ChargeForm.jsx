@@ -6,21 +6,20 @@ import { withRouter } from 'next/router'
 import { withApollo } from 'react-apollo'
 
 import localForage from 'lib/localForage'
-import { Button } from 'lib/components/form'
-import { DaiBalanceContentBox } from 'lib/components/DaiBalanceContentBox'
-import { CreditScore } from 'lib/components/CreditScore'
+import { Button, Input, Form } from 'lib/components/form'
 import { ConnectWallet } from 'lib/components/ConnectWallet'
 import { ConnectHumanityDao } from 'lib/components/ConnectHumanityDao'
 import { ContentBox } from 'lib/components/ContentBox'
-import { TokenQuery } from 'lib/components/TokenQuery'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
 
-const debug = require('debug')('pt:components:ECSCurrent')
+const debug = require('debug')('pt:components:ChargeForm')
 
-export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAddress(withNetworkAccountQuery(
-  class _ECSCurrent extends Component {
+export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAddress(withNetworkAccountQuery(
+  class _ChargeForm extends Component {
     state = {
+      daiAmountInEther: '',
+      qrCode: false, 
       humanityDaoConnected: false
     }
 
@@ -41,26 +40,41 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
         this.handleConnectDaoClick()
       }
     }
-    
-    getPage = () => {
-      const page = '/asdf'
-      switch (page) {
-        case 'this':
-          return 'that'
-        default:
-          return 'or'
+
+    handleAmountTextInputChange = (e) => {
+      const INPUT_MAX_LENGTH = 10
+      const value = e.target.value
+
+      if (
+        /^[0-9]*$/.test(value) &&
+        value &&
+        value.length <= INPUT_MAX_LENGTH
+      ) {
+        this.setState({
+          daiAmountInEther: parseInt(value, 10)
+        })
       }
     }
 
-    handleCreateCharge = (e) => {
+    handleSubmit = (e) => {
+      e.preventDefault()
+
+      if (this.state.daiAmountInEther > 0) {
+        this.setState({
+          qrCode: true
+        })
+      }
+    }
+
+    handleCloseQRCodeModal = (e) => {
       if (e) {
         e.preventDefault()
       }
-      
-      this.props.router.push(
-        `/charges/create`,
-        `/charges/create`, { shallow: true }
-      )
+
+      this.setState({
+        qrCode: false
+      })
+
     }
 
     render() {
@@ -105,9 +119,32 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
         console.error(networkAccountError)
       }
 
-      const page = this.getPage()
-
       return <>
+        <div
+          className={classnames(
+            'fixed t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 z-20 trans trans-faster', {
+              'lightSpeedOut': !this.state.qrCode,
+              'lightSpeedIn': this.state.qrCode,
+              'pointer-events-none': !this.state.qrCode
+            }
+          )}
+        >
+          <div className='r-0 t-0 absolute p-2 md:p-4'>
+            <Button
+              onClick={this.handleCloseQRCodeModal}
+              isText
+            >
+              &#10006;
+            </Button>
+          </div>
+          
+          <div className='flex flex-col justify-center items-center h-full'>
+            <p className='-mt-4'>
+              Show generated QR Code here
+            </p>
+          </div>
+        </div>
+
         <div
           className={classnames(
             'animated', {
@@ -124,42 +161,45 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             connected={this.state.humanityDaoConnected}
           />
 
-
-          <ContentBox
-            isTight
-          >
-            <CreditScore
-              label='Your credit score'
-              score={887}
-            />
-          </ContentBox>
-
           <ContentBox>
-            <Button
-              onClick={this.handleCreateCharge}
+            <p className='text-blue-300 text-lg'>
+              Create a new payment to a merchant (ie. bar, store, etc.)
+            </p>
+            <hr
+              style={{
+                borderTop: '2px solid #f2f2f2',
+                height: 1,
+                margin: '20px auto',
+                width: '80%'
+              }}
+            />
+            <Form
+              onSubmit={this.handleSubmit}
             >
-              + Create a new Charge
+              <label
+                htmlFor='amount'
+                className='mb-2 text-left text-xl w-full cursor-pointer'
+              >
+                Amount in Dai:
+              </label>
+              <Input
+                id='amount'
+                type='number'
+                onChange={this.handleAmountTextInputChange}
+                value={this.state.daiAmountInEther}
+                className='input w-full inline-flex'
+                roundedClasses='rounded-tl'
+                placeholder='0'
+              />
+            </Form>
+
+            <Button
+              onClick={this.handleSubmit}
+            >
+              + Create
             </Button>
           </ContentBox>
-        
-          <TokenQuery
-            userAddress={userAddress}
-            creditSystemAddress={creditSystemAddress}
-          >
-            {({ tokenQuery }) => <DaiBalanceContentBox
-              tokenQuery={tokenQuery}
-            />}
-          </TokenQuery>
         </div>
-
-        <Button
-          onClick={this.handleCreateCharge}
-          className='fixed qrcode-button shadow-xl'
-        >
-          <SVG src='/static/qrcode.svg'
-            className='qrcode-svg'
-          />
-        </Button>
       </>
     }
   }

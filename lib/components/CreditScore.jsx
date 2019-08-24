@@ -68,7 +68,7 @@ export const CreditScore = class _CreditScore extends Component {
         lineCap: 'round'
       },
       labels: [this.props.label],
-      // colors: ['#ff6600'], // starting color, adjust this!
+      colors: ['#34EFA8'], // starting color, adjust this!
     },
     series: [this.props.score * 0.1],
   }

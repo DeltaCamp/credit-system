@@ -40,6 +40,28 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
     })
   }
 
+  handleShowCreate = (e) => {
+    if (e) {
+      e.preventDefault()
+    }
+
+    this.props.router.push(
+      `/charges/create`,
+      `/charges/create`, { shallow: true }
+    )
+  }
+
+  handleShowAccount = (e) => {
+    if (e) {
+      e.preventDefault()
+    }
+
+    this.props.router.push(
+      `/`,
+      `/`, { shallow: true }
+    )
+  }
+
   render () {
     const { creditSystemAddress } = this.props
     const page = this.getPage()
@@ -65,7 +87,7 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
                 className='flex flex-col items-center py-24'
               >
                 <button
-                  onClick={this.showAccount}
+                  onClick={this.handleShowAccount}
                   className={classnames(
                     offCanvasLinkClasses, {
                       'text-black': page !== 'account',
@@ -74,6 +96,17 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
                   )
                   }>
                   Account
+                </button>
+                <button
+                  onClick={this.handleShowCreate}
+                  className={classnames(
+                    offCanvasLinkClasses, {
+                      'text-black': page !== 'create',
+                      'text-black': page === 'create'
+                    }
+                  )
+                  }>
+                  Create New Charge
                 </button>
               </div>
             </div>

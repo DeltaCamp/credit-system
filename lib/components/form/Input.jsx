@@ -9,18 +9,10 @@ export function Input(props) {
     textClasses,
     roundedClasses,
     isError,
-    isLight,
     isLeft,
-    isPurple
   } = props
 
-  const defaultClasses = 'focus:outline-none focus:outline-none leading-snug py-2 px-4 lg:py-4'
-
-  const darkClasses = 'text-white border-0 bg-teal-600 opacity-90 hover:opacity-100 focus:opacity-100'
-  
-  const lightClasses = 'text-black border-2 rounded bg-gray-100 hover:bg-gray-200 border-gray-100 hover:border-gray-200 focus:border-gray-500'
-
-  const purpleClasses = 'text-white border-0 bg-purple-600 opacity-90 hover:opacity-100 focus:opacity-100'
+  const defaultClasses = 'text-black border-l border-t border-r border-b-4 rounded bg-gray-100 border-gray-300 hover:border-gray-500 focus:border-gray-500 focus:outline-none focus:outline-none leading-snug py-2 px-4 lg:py-4'
 
   if (roundedClasses === undefined) {
     roundedClasses = 'rounded'
@@ -31,7 +23,7 @@ export function Input(props) {
   }
 
   if (textClasses === undefined) {
-    textClasses = 'text-xl sm:text-3xl'
+    textClasses = 'text-3xl'
   }
 
 
@@ -42,9 +34,6 @@ export function Input(props) {
     roundedClasses,
     props.className, {
       'text-red-500': isError,
-      [darkClasses]: !isLight,
-      [lightClasses]: isLight,
-      [purpleClasses]: isPurple,
       'text-center': !isLeft,
       'text-left': isLeft
     }

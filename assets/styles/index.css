@@ -3,7 +3,7 @@
 ::placeholder,
 .input::placeholder,
 .textarea::placeholder {
-  color: rgb(235, 203, 253);
+  color: rgb(215, 215, 215);
 }
 
 input:-internal-autofill-previewed,
@@ -58,7 +58,7 @@ h3 {
 }
 
 a {
-  @apply text-white underline;
+  @apply text-blue-300 underline;
 }
 
 a:hover {

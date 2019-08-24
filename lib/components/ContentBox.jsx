@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 
 export const ContentBox = ({ children, isTight }) => {
-  const padding = isTight ? 'p-2' : 'p-6'
+  const padding = isTight ? 'p-3 pb-3' : 'p-6'
 
   return <div
     className={classnames(

@@ -15,7 +15,6 @@ export function Form(props) {
     defaultClasses,
     props.className, {
       'text-red-500': isError,
-      'text-white border-0': !isLight,
       'text-black border-2 bg-gray-100 border-gray-100 hover:border-gray-200 focus:border-gray-500': isLight
     }
   )
