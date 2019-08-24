@@ -23,7 +23,7 @@ export const Meta = ({ title }) => {
         
         <link rel='stylesheet' href='/static/animate.css' />
 
-        <meta name='theme-color' content='#282844' />
+        <meta name='theme-color' content='#53B2FF' />
         <meta name='description' content={description} />
         <meta name='keywords' content={keywords} />
         <meta name='author' content='Vero - the Ethereum Credit App' />
