@@ -54,7 +54,11 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
       }
     }
 
-    linkToQRCodeGenerate = () => {
+    handleCreateCharge = (e) => {
+      if (e) {
+        e.preventDefault()
+      }
+      
       alert('implement me')
     }
 
@@ -137,6 +141,14 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
               unit={<DaiLogo />}
             /> */}
           </ContentBox>
+
+          <ContentBox>
+            <Button
+              onClick={this.handleCreateCharge}
+            >
+              Create a new Charge
+            </Button>
+          </ContentBox>
         
           <TokenQuery
             userAddress={userAddress}
@@ -149,7 +161,7 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
         </div>
 
         <Button
-          onClick={this.linkToQRCodeGenerate}
+          onClick={this.handleCreateCharge}
           className='fixed qrcode-button shadow-xl'
         >
           <SVG src='/static/qrcode.svg'

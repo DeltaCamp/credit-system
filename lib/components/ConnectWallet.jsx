@@ -17,6 +17,7 @@ export const ConnectWallet = withEthereumPermissionQuery(
         className={classnames(
           'fixed t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-fastest',
           {
+            'pointer-events-none': ethereumPermission,
             'slideOutUp': ethereumPermission
           }
         )}

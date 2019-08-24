@@ -57,7 +57,7 @@ export const CreditScore = class _CreditScore extends Component {
           shade: 'dark',
           type: 'horizontal',
           shadeIntensity: 0.5,
-          gradientToColors: ['#1FAA42'],
+          gradientToColors: ['#64F488'], // ending color, adjust this!
           inverseColors: false,
           opacityFrom: 1,
           opacityTo: 1,
@@ -68,8 +68,8 @@ export const CreditScore = class _CreditScore extends Component {
         lineCap: 'round'
       },
       labels: [this.props.label],
+      // colors: ['#ff6600'], // starting color, adjust this!
     },
-    
     series: [this.props.score * 0.1],
   }
 
