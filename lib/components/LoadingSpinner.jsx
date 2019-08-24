@@ -6,7 +6,7 @@ export const LoadingSpinner = ({ ready }) => (
     className={classnames('loading-indicator', { 'fade-exit': ready })}
   >
     <div
-      width='200'
+      width='100'
       className='mx-auto loader'
     />
   </div>

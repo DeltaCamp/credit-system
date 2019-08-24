@@ -23,11 +23,13 @@ export const withCreditSystemAddress = (WrappedComponent) => {
           creditSystemAddress
         }
 
-        if (newProps.creditSystemAddress) {
-          return <WrappedComponent {...newProps} />
-        } else {
-          return <LoadingSpinner />
-        }
+        return <WrappedComponent {...newProps} />
+
+        // if (newProps.creditSystemAddress) {
+        //   return <WrappedComponent {...newProps} />
+        // } else {
+        //   return <LoadingSpinner />
+        // }
       }
     )
   )
