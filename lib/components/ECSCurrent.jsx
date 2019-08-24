@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import ReactTimeout from 'react-timeout'
 import { withApollo } from 'react-apollo'
 
+import { Button } from 'lib/components/form'
+import { TransactionButton } from 'lib/components/TransactionButton'
+import { TableCol } from 'lib/components/TableCol'
+import { TableRow } from 'lib/components/TableRow'
+import { DaiLogo } from 'lib/components/DaiLogo'
 import { ConnectWallet } from 'lib/components/ConnectWallet'
 import { ContentBox } from 'lib/components/ContentBox'
 import { StatRow } from 'lib/components/StatRow'
@@ -14,6 +19,17 @@ const debug = require('debug')('pt:components:ECSCurrent')
 
 export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNetworkAccountQuery(
   class _ECSCurrent extends Component {
+    state = {
+      humanityDaoConnected: false
+    }
+
+    handleConnectDaoClick = (e) => {
+      e.preventDefault()
+      this.setState({
+        humanityDaoConnected: true
+      })
+    }
+    
     getPage = () => {
       const { page } = this.props.router.query
       switch (page) {
@@ -40,19 +56,37 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
             {
               !account ? <ConnectWallet /> :
               <>
-                <ContentBox
-                >
-                  <StatRow
-                    color='black'
-                    title='Your credit score:'
-                    value={creditScore(691)}
-                  />
+                <ContentBox>
+                  {this.state.humanityDaoConnected ? <>
+                      <StatRow
+                        color='black'
+                        title='Your credit score:'
+                        value={creditScore(691)}
+                      />
+                      <StatRow
+                        color='black'
+                        title='Current deposit:'
+                        value={'200'}
+                        unit={<DaiLogo />}
+                      />
+                    </> : <>
+                      <h3>
+                        For identity verification please connect your Ethereum address to HumanityDAO.
+                      </h3>
+                      <br />
+                      <Button
+                        onClick={this.handleConnectDaoClick}
+                      >
+                        Connect HumanityDAO
+                      </Button>
+                    </>
+                  }
                 </ContentBox>
                 
                 <ContentBox
                 >
-                  <div
-                    className='tab-button-menu tab-button-menu--right flex items-center justify-center menu'
+                  {/* <div
+                    className='tab-button-menu tab-button-menu--right flex items-center menu'
                   >
                     <TabButton
                       active={page === 'account'}
@@ -72,7 +106,33 @@ export const ECSCurrent = withApollo(ReactTimeout(withCreditSystemAddress(withNe
                     >
                       Transactions
                     </TabButton>
-                  </div>
+                  </div> */}
+
+                  <TableRow>
+                    <span className='text-7xl'>
+                      200&nbsp;
+                    </span> 
+
+                    <span className='text-sm text-gray-600'>
+                      Your current Dai <DaiLogo /> balance
+                    </span>
+                  </TableRow>
+
+                  <TableRow
+                    noRule
+                    isHorizontal
+                  >
+                    <TransactionButton
+                      txInFlight={true}
+                      color='green'
+                    >
+                      Deposit
+                    </TransactionButton>
+                    <TransactionButton
+                    >
+                      Withdraw
+                    </TransactionButton>
+                  </TableRow>
                 </ContentBox>
               </>
             }

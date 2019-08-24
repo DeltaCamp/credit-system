@@ -9,6 +9,7 @@ export function SmallButton(props) {
     paddingClasses,
     borderClasses,
     roundedClasses,
+    isOutline,
     color
   } = props
 
@@ -17,7 +18,7 @@ export function SmallButton(props) {
   }
   
   if (borderClasses === undefined) {
-    borderClasses = `border-b-2 border-${color}-200 focus:border-${color}-500 hover:border-white active:border-${color}-700`
+    borderClasses = `focus:border-${color}-500 hover:border-white active:border-${color}-700`
   }
 
   if (textClasses === undefined) {
@@ -29,14 +30,15 @@ export function SmallButton(props) {
   }
 
   if (roundedClasses === undefined) {
-    roundedClasses = 'rounded-full'
+    roundedClasses = 'rounded-lg'
   }
 
   if (backgroundClasses === undefined) {
-    backgroundClasses = `bg-${color}-600 hover:bg-${color}-500 focus:bg-${color}-600 active:bg-${color}-700`
+    backgroundClasses = `bg-${color}-400 hover:bg-${color}-500 focus:bg-${color}-600 active:bg-${color}-700`
   } 
 
   return <Button
+    isOutline={isOutline}
     backgroundClasses={backgroundClasses}
     textClasses={textClasses}
     paddingClasses={paddingClasses}

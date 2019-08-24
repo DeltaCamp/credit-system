@@ -33,10 +33,6 @@ export const StatRow = ({
   let titleTextClass = `text-lg xl:text-xl ${colorClass}`,
     valueTextClass = `font-bold text-lg xl:text-xl ${colorClass}`
 
-  if (unit) {
-    unit = <span className='text-white text-xs'>{unit}</span>
-  }
-
   return <div
     className='flex justify-between w-auto px-2'
   >
@@ -50,7 +46,7 @@ export const StatRow = ({
       <span
         className={`${valueTextClass} inline-block w-2/5 text-right`}
       >
-        {value} <span className='font-headline'>{unit}</span>
+        {value} {unit}
       </span>
     </div>
     {children}

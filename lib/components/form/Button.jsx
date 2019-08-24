@@ -11,11 +11,12 @@ export function Button(props) {
     paddingClasses,
     roundedClasses,
     className,
+    isOutline,
     color,
   } = props
 
   if (!color) {
-    color = 'purple'
+    color = 'blue'
   }
 
   const {
@@ -42,7 +43,7 @@ export function Button(props) {
   }
 
   if (borderClasses === undefined) {
-    borderClasses = `border-b-2 border-${color}-200 hover:border-white active:border-transparent`
+    borderClasses = `hover:border-white active:border-transparent`
   }
 
   if (textClasses === undefined) {
@@ -63,6 +64,12 @@ export function Button(props) {
   
   if (isError) {
     backgroundClasses = 'bg-red-500 hover:bg-red-500 active:bg-red-600'
+  }
+
+  if (isOutline) {
+    backgroundClasses = `bg-white hover:bg-white focus:white active:bg-white`
+    borderClasses = 'border border-blue-500'
+    textClasses = `text-xxs sm:text-xs md:text-base text-blue-500`
   }
 
   className = classnames(

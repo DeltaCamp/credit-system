@@ -69,6 +69,14 @@ module.exports = {
         cyan: {
           '400': '#6FE2DA',
         },
+        green: {
+          ...colors.green,
+          '200': '#82F09E',
+          '300': '#64F488',
+          '400': '#34D25C',
+          '500': '#1FAA42',
+          '600': '#0A912C',
+        },
         blue: {
           ...colors.blue,
         },
