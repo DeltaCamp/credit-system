@@ -89,7 +89,7 @@ export const CreditScore = ReactTimeout(class _CreditScore extends Component {
       this.setState({
         showChart: true
       })
-    }, 2000)
+    }, 1500)
   }
 
   updateChart() {

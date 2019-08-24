@@ -22,7 +22,9 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       daiAmountInEther: '',
       showQrCode: false, 
       humanityDaoConnected: false,
-      showCheckmark: false
+      showCheckmark: false,
+      recipientSelected: false,
+      showRecipientQRScanner: false
     }
 
     handleConnectDaoClick = async (e) => {
@@ -121,6 +123,23 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
       )
     }
 
+    showRecipientQRScanner = (e) => {
+      if (e) {
+        e.preventDefault()
+      }
+
+      this.setState({
+        showRecipientQRScanner: true
+      })
+    }
+
+    setRecipient = (recipientInfo) => {
+      this.setState({
+        recipientInfo,
+        recipientSelected: true
+      })
+    }
+
     render() {
       let loading = true
 
@@ -193,7 +212,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
                     className='mt-16'
                   >
                     <p className='text-2xl'>
-                      Have the staff scan this:
+                      Have the payment recipient scan this:
                     </p>
                     <img
                       className='mx-auto'
@@ -247,45 +266,86 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             </Button>
           </div>
 
-          <ContentBox className='mt-16'>
-            <p className='text-blue-300 text-xl px-8'>
-              How much would you like to send?
-            </p>
-            <hr
-              style={{
-                borderTop: '2px solid #f2f2f2',
-                height: 1,
-                margin: '20px auto',
-                width: '80%'
-              }}
-            />
-            <Form
-              onSubmit={this.handleSubmit}
-            >
-              <label
-                htmlFor='amount'
-                className='mb-2 text-left text-xl w-full cursor-pointer'
-              >
-                Amount in Dai:
-              </label>
-              <Input
-                id='amount'
-                type='number'
-                onChange={this.handleAmountTextInputChange}
-                value={this.state.daiAmountInEther}
-                className='input w-full inline-flex'
-                roundedClasses='rounded-tl'
-                placeholder='0'
-              />
-            </Form>
+          {!this.state.recipientSelected ? <>
+            <ContentBox className='mt-12'>
+              <p className='text-orange-500 text-xl px-8'>
+                Who would you like to send a payment to?
+              </p>
+              <hr />
+              <p className='text-gray-900 mt-6 ml-4 text-xl text-left'>
+                Recent:
+              </p>
+              
+              <ul className='text-left ml-4 mb-6'>
+                <li className='my-3'>
+                  <a href='/' className='text-blue-700 no-underline text-lg'>
+                    The Yard - Open Air
+                  </a>
+                </li>
+                <li className='my-3'>
+                  <a href='/' className='text-blue-700 no-underline text-lg'>
+                    Room77
+                  </a>
+                </li>
+                <li className='my-3'>
+                  <a href='/' className='text-blue-700 no-underline text-lg'>
+                    Brewhaus
+                  </a>
+                </li>
+              </ul>
 
-            <Button
-              onClick={this.handleSubmit}
-              disabled={this.state.daiAmountInEther < 1}
-            >
-              + Create Send Code
-            </Button>
-          </ContentBox>
+              <hr />
+              <Button
+                onClick={this.showRecipientQRScanner}
+              >
+                + Add New Recipient
+              </Button>
+            </ContentBox>
+            </> : <>
+            <ContentBox className='mt-12'>
+              <p className='text-orange-500 text-xl px-8'>
+                How much would you like to send?
+              </p>
+              <hr
+                style={{
+                  borderTop: '2px solid #f2f2f2',
+                  height: 1,
+                  margin: '20px auto',
+                  width: '80%'
+                }}
+              />
+              <Form
+                onSubmit={this.handleSubmit}
+              >
+                <label
+                  htmlFor='amount'
+                  className='mb-2 text-left text-xl w-full cursor-pointer'
+                >
+                  Amount in Dai:
+                </label>
+                <Input
+                  id='amount'
+                  type='number'
+                  onChange={this.handleAmountTextInputChange}
+                  value={this.state.daiAmountInEther}
+                  className='input w-full inline-flex'
+                  roundedClasses='rounded-tl'
+                  placeholder='0'
+                />
+              </Form>
+
+              <Button
+                onClick={this.handleSubmit}
+                disabled={this.state.daiAmountInEther < 1}
+              >
+                + Create Send Code
+              </Button>
+            </ContentBox>
+          </>}
+
+          
+
+
         </div>
       </>
     }
