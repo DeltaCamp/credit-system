@@ -46,35 +46,22 @@ export const DaiBalanceContentBox =
         </div> */}
         <TableRow>
         </TableRow>
-        <TableRow>
+        <TableRow
+          noRule
+        >
           <h6>
-            Merchants will determine your credibility by your credit score and account balance.
-            <br />
-            <br />
-            Top up your account balance here:
+            Merchants will determine your credibility by your credit score and Dai balance.
+          </h6>
+          <hr />
+          <h6>
+            To stop using Vero withdraw your stake here:
           </h6>
         </TableRow>
         
-{/* 
-        <TableRow>
-          <span className='text-7xl'>
-            200&nbsp;
-          </span> 
-
-          <span className='text-sm text-gray-600'>
-            Your current Dai <DaiLogo /> balance
-          </span>
-        </TableRow> */}
-
         <TableRow
           noRule
           isHorizontal
         >
-          <TransactionButton
-            color='green'
-          >
-            Deposit
-          </TransactionButton>
           <TransactionButton
           >
             Withdraw

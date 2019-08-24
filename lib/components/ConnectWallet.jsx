@@ -29,7 +29,7 @@ export const ConnectWallet = withEthereumPermissionQuery(
               Step 1.
             </h5>
             <h1 className='text-2xl mb-6'>
-              To interact with the Ethereum Credit System please permit transactions with your wallet.
+              To interact with Vero please permit transactions with your wallet.
             </h1>
             <Button
               backgroundClasses='bg-blue-600 hover:bg-blue-400 focus:bg-blue-400 active:bg-blue-700'

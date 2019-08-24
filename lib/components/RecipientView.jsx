@@ -8,20 +8,17 @@ import { withApollo } from 'react-apollo'
 
 import localForage from 'lib/localForage'
 import { Button } from 'lib/components/form'
-import { DaiBalanceContentBox } from 'lib/components/DaiBalanceContentBox'
-import { CreditScore } from 'lib/components/CreditScore'
+import { RecipientDaiBalance } from 'lib/components/RecipientDaiBalance'
 import { ConnectWallet } from 'lib/components/ConnectWallet'
-import { ConnectHumanityDao } from 'lib/components/ConnectHumanityDao'
-import { StakeFunds } from 'lib/components/StakeFunds'
 import { ContentBox } from 'lib/components/ContentBox'
 import { TokenQuery } from 'lib/components/TokenQuery'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
 
-const debug = require('debug')('pt:components:ECSCurrent')
+const debug = require('debug')('pt:components:RecipientView')
 
-export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAddress(withNetworkAccountQuery(
-  class _ECSCurrent extends Component {
+export const RecipientView = withRouter(withApollo(ReactTimeout(withCreditSystemAddress(withNetworkAccountQuery(
+  class _RecipientView extends Component {
     state = {
       humanityDaoConnected: false,
       hasStaked: false,
@@ -139,6 +136,7 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
         <div
           className={classnames(
             'animated z-1', {
+              'zoomOut': !this.state.humanityDaoConnected,
               // 'zoomIn': this.state.humanityDaoConnected
             }
           )}
@@ -147,40 +145,14 @@ export const ECSCurrent = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             userAddress={userAddress}
           />
 
-          <ConnectHumanityDao
-            connected={this.state.humanityDaoConnected}
-            handleConnectDaoClick={this.handleConnectDaoClick}
-          />
-
-          <StakeFunds
-            hasStaked={this.state.hasStaked}
-            showCheckmark={this.state.showCheckmark}
-            handleStake={this.handleStake}
-          />
-
-          <ContentBox
-            isTight
+          <TokenQuery
+            userAddress={userAddress}
+            creditSystemAddress={creditSystemAddress}
           >
-            <CreditScore
-              label='Your credit score'
-            />
-            <p className='text-xxs text-blue-400 underline'>Learn more about your score</p>
-          </ContentBox>
-
-          <ContentBox>
-            <Button
-              onClick={this.handleCreateCharge}
-            >
-              <FeatherIcon
-                icon='send'
-                className='mx-auto text-white mb-2 mt-1'
-                height='28'
-                width='28'
-              /> Send Money
-            </Button>
-          </ContentBox>
-        
-          <DaiBalanceContentBox />
+            {({ tokenQuery }) => <RecipientDaiBalance
+              tokenQuery={tokenQuery}
+            />}
+          </TokenQuery>
         </div>
 
         <Button

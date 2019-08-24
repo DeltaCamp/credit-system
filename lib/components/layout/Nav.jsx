@@ -45,9 +45,24 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
       e.preventDefault()
     }
 
+    this.hideOffCanvasMenu()
+
     this.props.router.push(
       `/charges/create`,
       `/charges/create`, { shallow: true }
+    )
+  }
+
+  handleShowMerchants = (e) => {
+    if (e) {
+      e.preventDefault()
+    }
+
+    this.hideOffCanvasMenu()
+
+    this.props.router.push(
+      `/recipient`,
+      `/recipient`, { shallow: true }
     )
   }
 
@@ -55,6 +70,8 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
     if (e) {
       e.preventDefault()
     }
+
+    this.hideOffCanvasMenu()
 
     this.props.router.push(
       `/`,
@@ -66,7 +83,7 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
     const { creditSystemAddress } = this.props
     const page = this.getPage()
 
-    const offCanvasLinkClasses = `text-3xl flex-1 mt-2 sm:mt-3 text-blue-500 hover:text-blue-300`
+    const offCanvasLinkClasses = `text-3xl flex-1 text-blue-500 hover:text-blue-300`
 
     return (
       <>
@@ -89,10 +106,7 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
                 <button
                   onClick={this.handleShowAccount}
                   className={classnames(
-                    offCanvasLinkClasses, {
-                      'text-black': page !== 'account',
-                      'text-black': page === 'account'
-                    }
+                    offCanvasLinkClasses
                   )
                   }>
                   Account
@@ -100,13 +114,19 @@ export const Nav = withRouter(withCreditSystemAddress(class _Nav extends Compone
                 <button
                   onClick={this.handleShowCreate}
                   className={classnames(
-                    offCanvasLinkClasses, {
-                      'text-black': page !== 'create',
-                      'text-black': page === 'create'
-                    }
+                    offCanvasLinkClasses
                   )
                 }>
                   Send Money
+                </button>
+                <hr />
+                <button
+                  onClick={this.handleShowMerchants}
+                  className={classnames(
+                    offCanvasLinkClasses
+                  )
+                }>
+                  Merchants
                 </button>
               </div>
             </div>
