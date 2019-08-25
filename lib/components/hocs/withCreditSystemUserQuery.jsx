@@ -11,6 +11,7 @@ export function withCreditSystemUserQuery (Component) {
       },
       options: (props) => {
         return {
+          pollInterval: 2000,
           variables: {
             userAddress: props.userAddress || props.networkAccountQuery.account
           }
