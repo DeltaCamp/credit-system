@@ -7,6 +7,7 @@ export const ContentBox = ({ children, className, isTight, noGutter }) => {
   
   if (noGutter) {
     margin = 'mb-4'
+    padding = 'px-3 pt-0 pb-4'
   }
 
   return <div

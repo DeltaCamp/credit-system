@@ -310,7 +310,7 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
             <ContentBox
               noGutter
             >
-              <p className='text-pink-500 text-lg px-8'>
+              <p className='text-pink-500 text-lg px-8 mt-6'>
                 1. Who would you like to send a payment to?
               </p>
             </ContentBox>
@@ -404,20 +404,15 @@ export const ChargeForm = withRouter(withApollo(ReactTimeout(withCreditSystemAdd
                 </Button>
               </div>
 
-              <p className='text-pink-500 text-lg px-8'>
+              <p className='text-pink-500 text-lg px-8 mt-6'>
                 2. How much would you like to send to
                 <br />
                 "<span className='text-blue-600 font-bold'>{shortenAddress(this.state.recipientInfo.address)}</span>" ?
                 {/* "<span className='text-pink-700 font-bold'>{this.state.recipientInfo.name}</span>" ? */}
               </p>
-              <hr
-                style={{
-                  borderTop: '2px solid #f2f2f2',
-                  height: 1,
-                  margin: '20px auto',
-                  width: '80%'
-                }}
-              />
+            </ContentBox>
+
+            <ContentBox>
               <Form
                 onSubmit={this.handleSubmit}
               >

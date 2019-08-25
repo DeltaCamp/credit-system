@@ -24,7 +24,7 @@ export const ChargeQR = withNetworkAccountQuery(class _ChargeQR extends PureComp
       <div
         className='flex flex-col w-full justify-start items-center'
       >
-        <p className='text-lg'>
+        <p className='text-lg mt-6'>
           To complete payment, have the recipient scan this:
         </p>
         <a
