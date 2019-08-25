@@ -4,6 +4,7 @@ import { ethers } from 'ethers'
 import FeatherIcon from 'feather-icons-react'
 
 import { abiMapping } from 'lib/apollo/abiMapping'
+import { DaiLogo } from 'lib/components/DaiLogo'
 import { Button } from 'lib/components/form'
 import { withCreditSystemUserQuery } from 'lib/components/hocs/withCreditSystemUserQuery'
 import { withFormProps } from 'lib/components/hocs/withFormProps'
@@ -102,7 +103,7 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
             </> : (
               <>
                 <p className='text-sm text-gray-700'>
-                  100 Dai will be kept as overdraft protection to pay merchants if your Dai balance falls below 0.
+                  <span className='font-bold'>100 Dai <DaiLogo /></span> will be kept as overdraft protection to pay merchants if your Dai balance falls below 0.
                 </p>
                 <p className='text-sm text-gray-500 my-6'>
                   You will need to approve the Dai spend prior to depositing.
@@ -114,14 +115,14 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
                     disabled={!needsApproval}
                     onClick={this.handleApproval}
                   >
-                    Approve Dai
+                    Approve
                   </Button>
 
                   <Button
                     disabled={needsApproval}
                     onClick={this.handleStake}
                   >
-                    Deposit Dai
+                    Deposit
                   </Button>
                 </div>
               </>
