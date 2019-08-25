@@ -18,7 +18,7 @@ export const ConnectWallet = withEthereumPermissionQuery(
           'fixed forceOffScreen t-0 l-0 w-full mx-auto bg-white shadow text-black animated h-full text-center p-6 trans trans-fastest z-40', 
           {
             // 'pointer-events-none': ethereumPermission,
-            // 'slideInDown': !ethereumPermission,
+            'slideInDown': !ethereumPermission,
             // 'slideOutUp': ethereumPermission
           }
         )}
@@ -42,9 +42,9 @@ export const ConnectWallet = withEthereumPermissionQuery(
             </Button>
           </div>
 
-        <p className='text-blue-300 mt-24'>
-          The Ethereum Credit System is a secure, audited in-person collateral tool.
-        </p>
+          <p className='text-blue-300 mt-24'>
+            <span className='font-bold'>Vero</span> is a secure, audited app for using your Credit Score as collateral with vendors.
+          </p>
         </div>
       </div>
     }

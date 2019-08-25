@@ -8,7 +8,7 @@ import { EtherscanAddressLink } from 'lib/components/EtherscanAddressLink'
 
 export const EthereumNetworkStatus = function _EthereumNetworkStatus() {
   return (
-    <div className='mt-1 sm:mt-0 text-xs sm:text-sm tracking-wide leading-none sm:leading-normal text-right'>
+    <div className='mt-0 sm:mt-0 text-xs sm:text-sm tracking-wide leading-none sm:leading-normal text-right'>
       <div className='spinner-hidden'>
         <DynamicApolloWrapper>
           <Query query={queries.systemInfoQuery}>

@@ -109,8 +109,7 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
                   You will need to approve the Dai spend prior to depositing.
                 </p>
 
-                <div className='flex justify-between my-6 mx-3'>
-
+                <div className='flex justify-between my-6 mx-8'>
                   <Button
                     disabled={!needsApproval}
                     onClick={this.handleApproval}
