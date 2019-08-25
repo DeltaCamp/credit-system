@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 
 export const ContentBox = ({ children, className, isTight, noGutter }) => {
-  let padding = isTight ? 'p-3 pb-3' : 'p-6'
+  let padding = isTight ? 'px-3 pt-0 pb-3' : 'p-6'
   let margin = 'mx-4 mt-2 mb-4'
   
   if (noGutter) {

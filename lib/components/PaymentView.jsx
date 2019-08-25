@@ -132,7 +132,9 @@ export const PaymentView = withSystemInfoQuery(withRouter(withFormProps(ReactTim
             label='Sender credit score'
             userAddress={from}
           />
-          <p className='text-xxs text-blue-400 underline'>The sender's credit score</p>
+          <p className='text-xxs text-blue-400 underline my-0'>
+            The sender's credit score
+          </p>
         </ContentBox>
         <ContentBox>
           <h2>Sender Balance</h2>
