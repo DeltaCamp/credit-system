@@ -88,7 +88,7 @@ export const StakeFunds = withTokenQuery(withFormProps(withCreditSystemUserQuery
             )}
           >
             <h6 className='text-gray-700'>
-              Step 3.
+              Step 2.
             </h6>
             <h3>
               Stake a deposit:

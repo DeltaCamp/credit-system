@@ -15,16 +15,16 @@ export const ConnectHumanityDao = class _ConnectHumanityDao extends PureComponen
       )}
     >
       <h5>
-        Step 2.
+        Step 1.
       </h5>
       <h3>
-        For identity verification please connect your Ethereum address to HumanityDAO:
+        For identity verification please sign up to <span className='text-orange-400'>brightID</span>:
       </h3>
       <br />
       <Button
         onClick={this.props.handleConnectDaoClick}
       >
-        Connect HumanityDAO
+        Connect brightID
       </Button>
     </div>
   }

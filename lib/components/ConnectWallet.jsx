@@ -25,9 +25,6 @@ export const ConnectWallet = withEthereumPermissionQuery(
       >
         <div className='flex flex-col justify-center h-full'>
           <div>
-            <h5>
-              Step 1.
-            </h5>
             <h1 className='text-2xl mb-6'>
               To interact with Vero please permit transactions with your wallet.
             </h1>
