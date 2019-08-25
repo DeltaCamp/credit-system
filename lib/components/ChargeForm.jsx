@@ -4,6 +4,7 @@ import ReactTimeout from 'react-timeout'
 import FeatherIcon from 'feather-icons-react'
 import { withRouter } from 'next/router'
 import { withApollo } from 'react-apollo'
+import { ethers } from 'ethers'
 
 import localForage from 'lib/localForage'
 import { Button, Input, Form } from 'lib/components/form'

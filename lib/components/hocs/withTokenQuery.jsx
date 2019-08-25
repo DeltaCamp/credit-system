@@ -8,11 +8,11 @@ export function withTokenQuery (Component) {
   return withNetworkAccountQuery(graphql(tokenQuery, {
     name: 'tokenQuery',
     skip: (props) => {
-      return !props.networkAccountQuery.account || !props.networkAccountQuery.networkId
+      return !props.userAddress && (!props.networkAccountQuery.account || !props.networkAccountQuery.networkId)
     },
     options: (props) => {
       const variables = {
-        userAddress: props.networkAccountQuery.account,
+        userAddress: props.userAddress || props.networkAccountQuery.account,
         spender: abiMapping.getAddress('CreditSystem', props.networkAccountQuery.networkId)
       }
 

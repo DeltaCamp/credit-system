@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import classnames from 'classnames'
 import ReactTimeout from 'react-timeout'
 import FeatherIcon from 'feather-icons-react'
-import { withRouter } from 'next/router'
-import { withApollo } from 'react-apollo'
 import { ethers } from 'ethers'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { withRouter } from 'next/router'
 
 import { CreditScore } from 'lib/components/CreditScore'
 import { DaiBalanceChart } from 'lib/components/DaiBalanceChart'
@@ -14,22 +12,41 @@ import { shortenAddress } from 'lib/utils/shortenAddress'
 import { ContentBox } from 'lib/components/ContentBox'
 import { withCreditSystemAddress } from 'lib/components/hocs/withCreditSystemAddress'
 import { withNetworkAccountQuery } from 'lib/components/hocs/withNetworkAccountQuery'
-import { withEthereumPermissionQuery } from 'lib/components/hocs/withEthereumPermissionQuery'
+import { withSystemInfoQuery } from 'lib/components/hocs/withSystemInfoQuery'
+import { withFormProps } from 'lib/components/hocs/withFormProps'
+import { TransactionQuery } from 'lib/components/TransactionQuery'
 
 const debug = require('debug')('pt:components:ChargeForm')
 
-export const PaymentView = withEthereumPermissionQuery(withRouter(withApollo(ReactTimeout(withCreditSystemAddress(withNetworkAccountQuery(
+export const PaymentView = withSystemInfoQuery(withRouter(withFormProps(ReactTimeout(withCreditSystemAddress(withNetworkAccountQuery(
   class _PaymentView extends Component {
-    handlePayment () {
-      
+    handlePayment = (e) => {
+      e.preventDefault()
+
+      const variables = {
+        contractName: 'CreditSystem',
+        method: 'charge',
+        args: this.chargeArgs()
+      }
+
+      this.props.sendTransaction({ variables })
+    }
+
+    chargeArgs = () => {
+      const sig = ethers.utils.splitSignature(this.props.router.query.signature)
+      return [
+        this.props.router.query.charge,
+        sig.r,
+        sig.s,
+        sig.v
+      ]
     }
 
     render() {
-      const { router, ethereumPermissionQuery } = this.props
+      const { router, systemInfoQuery } = this.props
       let { charge } = router.query
 
-      const { ethereumPermission } = ethereumPermissionQuery
-      console.log('PERMISSIONS: ', ethereumPermission)
+      const { systemInfo } = systemInfoQuery || {}
 
       const decodedData = ethers.utils.defaultAbiCoder.decode(
         [
@@ -43,7 +60,61 @@ export const PaymentView = withEthereumPermissionQuery(withRouter(withApollo(Rea
 
       const [from, to, value, txId] = decodedData
 
-      console.log(decodedData)
+      let button
+      if (systemInfo && systemInfo.hasWeb3Available) {
+        button = (
+          <TransactionQuery
+            contractName='CreditSystem'
+            method='charge'
+            args={this.chargeArgs()}>
+
+            {(transaction) => {
+              let inFlight = false
+              let complete = false
+              let err
+              if (transaction) {
+                const { sent, completed, error } = transaction
+                inFlight = sent && !completed
+                complete = completed
+                err = error
+              }
+              
+              if (complete && !err) {
+                return <FeatherIcon
+                  icon='check-circle'
+                  className='mx-auto mt-8 text-green-400'
+                  height='100'
+                  width='100'
+                />
+              } else {
+                return <Button
+                    onClick={this.handlePayment}
+                    disabled={inFlight}
+                  >
+                  <FeatherIcon
+                    icon='download'
+                    className='mx-auto text-white mb-2 mt-1'
+                    height='28'
+                    width='28'
+                  /> Deposit money
+                </Button>
+              }
+            }}
+          </TransactionQuery>
+        )
+      } else {
+        button =
+          <CopyToClipboard text={window.location.href}>
+            <Button>
+              <FeatherIcon
+                icon='copy'
+                className='mx-auto text-white mb-2 mt-1'
+                height='28'
+                width='28'
+              /> Copy Link
+            </Button>
+          </CopyToClipboard>
+      }
 
       return <>
         <ContentBox>
@@ -52,16 +123,7 @@ export const PaymentView = withEthereumPermissionQuery(withRouter(withApollo(Rea
           <h1 className='text-4xl m-0'>{ethers.utils.formatEther(value)} DAI</h1>
         </ContentBox>
         <ContentBox>
-          <Button
-            onClick={this.handleCreateCharge}
-          >
-            <FeatherIcon
-              icon='download'
-              className='mx-auto text-white mb-2 mt-1'
-              height='28'
-              width='28'
-            /> Deposit money
-          </Button>
+          {button}
         </ContentBox>
         <ContentBox
           isTight
