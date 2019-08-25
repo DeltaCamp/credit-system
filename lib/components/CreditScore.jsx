@@ -130,7 +130,7 @@ export const CreditScore = withCreditSystemUserQuery(ReactTimeout(class _CreditS
         series={series}
         type='radialBar'
         width='100%'
-        height='300'
+        height='260'
       />
     </div>
   }
