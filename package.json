@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
-    "apexcharts": "^3.8.4",
+    "apexcharts": "^3.24.0",
     "apollo-cache-inmemory": "^1.6.2",
     "apollo-client": "^2.6.3",
     "apollo-link-ethereum": "^0.1.2",
